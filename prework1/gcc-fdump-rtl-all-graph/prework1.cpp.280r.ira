@@ -1,0 +1,741 @@
+
+;; Function main (main, funcdef_no=1522, decl_uid=36325, cgraph_uid=436, symbol_order=438)
+
+starting the processing of deferred insns
+ending the processing of deferred insns
+df_analyze called
+df_worklist_dataflow_doublequeue: n_basic_blocks 8 n_edges 8 count 8 (    1)
+;; 2 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2 3 4 5 6 7
+;;
+;; Loop 1
+;;  header 3, latch 4
+;;  depth 1, outer 0
+;;  nodes: 3 4
+;; 2 succs { 3 }
+;; 3 succs { 5 4 }
+;; 4 succs { 3 }
+;; 5 succs { 7 6 }
+;; 6 succs { }
+;; 7 succs { 1 }
+Building IRA IR
+verify found no changes in insn with uid = 12.
+verify found no changes in insn with uid = 16.
+verify found no changes in insn with uid = 21.
+verify found no changes in insn with uid = 25.
+verify found no changes in insn with uid = 30.
+verify found no changes in insn with uid = 43.
+verify found no changes in insn with uid = 48.
+verify found no changes in insn with uid = 66.
+starting the processing of deferred insns
+ending the processing of deferred insns
+df_analyze called
+
+Pass 0 for finding pseudo/allocno costs
+
+    r97: preferred GENERAL_REGS, alternative NO_REGS, allocno GENERAL_REGS
+    a2 (r97,l0) best GENERAL_REGS, allocno GENERAL_REGS
+    r96: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a4 (r96,l0) best SIREG, allocno GENERAL_REGS
+    r95: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a5 (r95,l0) best SIREG, allocno GENERAL_REGS
+    r94: preferred GENERAL_REGS, alternative NO_REGS, allocno GENERAL_REGS
+    a6 (r94,l0) best GENERAL_REGS, allocno GENERAL_REGS
+    r93: preferred GENERAL_REGS, alternative NO_REGS, allocno GENERAL_REGS
+    a7 (r93,l0) best GENERAL_REGS, allocno GENERAL_REGS
+    r92: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a10 (r92,l0) best SIREG, allocno GENERAL_REGS
+    r91: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a11 (r91,l0) best SIREG, allocno GENERAL_REGS
+    r90: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a13 (r90,l0) best SIREG, allocno GENERAL_REGS
+    r89: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a14 (r89,l0) best SIREG, allocno GENERAL_REGS
+    r88: preferred SIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a15 (r88,l0) best SIREG, allocno GENERAL_REGS
+    r87: preferred AREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a0 (r87,l0) best AREG, allocno GENERAL_REGS
+    r86: preferred GENERAL_REGS, alternative NO_REGS, allocno GENERAL_REGS
+    a1 (r86,l0) best GENERAL_REGS, allocno GENERAL_REGS
+    r85: preferred AREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a3 (r85,l0) best AREG, allocno GENERAL_REGS
+    r84: preferred GENERAL_REGS, alternative NO_REGS, allocno GENERAL_REGS
+    a8 (r84,l0) best GENERAL_REGS, allocno GENERAL_REGS
+    r83: preferred AREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a9 (r83,l0) best AREG, allocno GENERAL_REGS
+    r82: preferred AREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a12 (r82,l0) best AREG, allocno GENERAL_REGS
+
+  a0(r87,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:14000 NO_REX_SSE_REGS:14000 SSE_REGS:14000 MMX_REGS:19000 INT_SSE_REGS:19000 ALL_REGS:312000 MEM:7000
+  a1(r86,l0) costs: AREG:0 DREG:0 CREG:0 BREG:0 SIREG:0 DIREG:0 AD_REGS:0 CLOBBERED_REGS:0 Q_REGS:0 TLS_GOTBASE_REGS:0 GENERAL_REGS:0 SSE_FIRST_REG:14000 NO_REX_SSE_REGS:14000 SSE_REGS:14000 MMX_REGS:19000 INT_SSE_REGS:19000 ALL_REGS:312000 MEM:6000
+  a2(r97,l0) costs: AREG:0 DREG:0 CREG:0 BREG:0 SIREG:0 DIREG:0 AD_REGS:0 CLOBBERED_REGS:0 Q_REGS:0 TLS_GOTBASE_REGS:0 GENERAL_REGS:0 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a3(r85,l0) costs: AREG:4000 DREG:4000 CREG:4000 BREG:4000 SIREG:4000 DIREG:1000 AD_REGS:4000 CLOBBERED_REGS:4000 Q_REGS:4000 TLS_GOTBASE_REGS:4000 GENERAL_REGS:4000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:26000 INT_SSE_REGS:26000 ALL_REGS:424000 MEM:12000
+  a4(r96,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a5(r95,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a6(r94,l0) costs: AREG:0 DREG:0 CREG:0 BREG:0 SIREG:0 DIREG:0 AD_REGS:0 CLOBBERED_REGS:0 Q_REGS:0 TLS_GOTBASE_REGS:0 GENERAL_REGS:0 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a7(r93,l0) costs: AREG:0 DREG:0 CREG:0 BREG:0 SIREG:0 DIREG:0 AD_REGS:0 CLOBBERED_REGS:0 Q_REGS:0 TLS_GOTBASE_REGS:0 GENERAL_REGS:0 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a8(r84,l0) costs: AREG:0 DREG:0 CREG:0 BREG:0 SIREG:0 DIREG:0 AD_REGS:0 CLOBBERED_REGS:0 Q_REGS:0 TLS_GOTBASE_REGS:0 GENERAL_REGS:0 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a9(r83,l0) costs: AREG:4000 DREG:4000 CREG:4000 BREG:4000 SIREG:4000 DIREG:1000 AD_REGS:4000 CLOBBERED_REGS:4000 Q_REGS:4000 TLS_GOTBASE_REGS:4000 GENERAL_REGS:4000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:26000 INT_SSE_REGS:26000 ALL_REGS:424000 MEM:12000
+  a10(r92,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a11(r91,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a12(r82,l0) costs: AREG:4000 DREG:4000 CREG:4000 BREG:4000 SIREG:4000 DIREG:1000 AD_REGS:4000 CLOBBERED_REGS:4000 Q_REGS:4000 TLS_GOTBASE_REGS:4000 GENERAL_REGS:4000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:26000 INT_SSE_REGS:26000 ALL_REGS:424000 MEM:12000
+  a13(r90,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a14(r89,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+  a15(r88,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:26000 INT_SSE_REGS:26000 ALL_REGS:424000 MEM:12000
+
+   Insn 70(l0): point = 0
+   Insn 69(l0): point = 2
+   Insn 66(l0): point = 5
+   Insn 65(l0): point = 8
+   Insn 64(l0): point = 10
+   Insn 60(l0): point = 12
+   Insn 57(l0): point = 14
+   Insn 34(l0): point = 17
+   Insn 33(l0): point = 19
+   Insn 32(l0): point = 21
+   Insn 74(l0): point = 24
+   Insn 51(l0): point = 26
+   Insn 50(l0): point = 28
+   Insn 49(l0): point = 30
+   Insn 48(l0): point = 32
+   Insn 47(l0): point = 34
+   Insn 46(l0): point = 36
+   Insn 45(l0): point = 38
+   Insn 44(l0): point = 40
+   Insn 43(l0): point = 42
+   Insn 42(l0): point = 44
+   Insn 41(l0): point = 46
+   Insn 40(l0): point = 48
+   Insn 39(l0): point = 50
+   Insn 38(l0): point = 52
+   Insn 37(l0): point = 54
+   Insn 36(l0): point = 56
+   Insn 30(l0): point = 59
+   Insn 29(l0): point = 61
+   Insn 28(l0): point = 63
+   Insn 27(l0): point = 65
+   Insn 26(l0): point = 67
+   Insn 25(l0): point = 69
+   Insn 24(l0): point = 71
+   Insn 23(l0): point = 73
+   Insn 22(l0): point = 75
+   Insn 21(l0): point = 77
+   Insn 20(l0): point = 79
+   Insn 19(l0): point = 81
+   Insn 18(l0): point = 83
+   Insn 17(l0): point = 85
+   Insn 16(l0): point = 87
+   Insn 15(l0): point = 89
+   Insn 14(l0): point = 91
+   Insn 13(l0): point = 93
+   Insn 12(l0): point = 95
+   Insn 11(l0): point = 97
+   Insn 10(l0): point = 99
+   Insn 9(l0): point = 101
+   Insn 8(l0): point = 103
+   Insn 7(l0): point = 105
+   Insn 6(l0): point = 107
+   Insn 3(l0): point = 109
+ a0(r87): [8..12] [3..4]
+ a1(r86): [13..14]
+ a2(r97): [29..30]
+ a3(r85): [35..40]
+ a4(r96): [37..38]
+ a5(r95): [47..48]
+ a6(r94): [51..52]
+ a7(r93): [55..56]
+ a8(r84): [20..21]
+ a9(r83): [62..67]
+ a10(r92): [64..65]
+ a11(r91): [74..75]
+ a12(r82): [80..85]
+ a13(r90): [82..83]
+ a14(r89): [92..93]
+ a15(r88): [100..101]
+Compressing live ranges: from 112 to 28 - 25%
+Ranges after the compression:
+ a0(r87): [0..3]
+ a1(r86): [4..5]
+ a2(r97): [8..9]
+ a3(r85): [10..11]
+ a4(r96): [10..11]
+ a5(r95): [12..13]
+ a6(r94): [14..15]
+ a7(r93): [16..17]
+ a8(r84): [6..7]
+ a9(r83): [18..19]
+ a10(r92): [18..19]
+ a11(r91): [20..21]
+ a12(r82): [22..23]
+ a13(r90): [22..23]
+ a14(r89): [24..25]
+ a15(r88): [26..27]
+  pref0:a4(r96)<-hr4@1500
+  pref1:a5(r95)<-hr4@1500
+  pref2:a10(r92)<-hr4@1500
+  pref3:a11(r91)<-hr4@1500
+  pref4:a13(r90)<-hr4@1500
+  pref5:a14(r89)<-hr4@1500
+  pref6:a15(r88)<-hr4@1500
+  pref7:a0(r87)<-hr0@1500
+  pref8:a3(r85)<-hr0@1500
+  pref9:a9(r83)<-hr0@1500
+  pref10:a12(r82)<-hr0@1500
+  regions=1, blocks=8, points=28
+    allocnos=16 (big 0), copies=0, conflicts=0, ranges=16
+Disposition:
+   12:r82  l0     1    9:r83  l0     1    8:r84  l0     0    3:r85  l0     1
+    1:r86  l0     0    0:r87  l0     0   15:r88  l0     0   14:r89  l0     0
+   13:r90  l0     0   11:r91  l0     0   10:r92  l0     0    7:r93  l0     0
+    6:r94  l0     0    5:r95  l0     0    4:r96  l0     0    2:r97  l0     0
++++Costs: overall -5000, reg -5000, mem 0, ld 0, st 0, move 0
++++       move loops 0, new jumps 0
+
+
+main
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 28 [mm0] 29 [mm1] 30 [mm2] 31 [mm3] 32 [mm4] 33 [mm5] 34 [mm6] 35 [mm7] 36 [r8] 37 [r9] 38 [r10] 39 [r11] 44 [xmm8] 45 [xmm9] 46 [xmm10] 47 [xmm11] 48 [xmm12] 49 [xmm13] 50 [xmm14] 51 [xmm15] 52 [] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 []
+;;  hardware regs used 	 7 [sp] 16 [argp] 19 [frame]
+;;  regular block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 16 [argp] 19 [frame] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 36 [r8] 37 [r9]
+;;  exit block uses 	 0 [ax] 6 [bp] 7 [sp] 19 [frame]
+;;  regs ever live 	 0 [ax] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags]
+;;  ref usage 	r0={10d,5u} r1={9d} r2={9d} r4={16d,7u} r5={16d,7u} r6={1d,7u} r7={1d,15u} r8={8d} r9={8d} r10={8d} r11={8d} r12={8d} r13={8d} r14={8d} r15={8d} r16={1d,6u} r17={14d,2u} r18={8d} r19={1d,27u} r20={9d} r21={9d} r22={9d} r23={9d} r24={9d} r25={9d} r26={9d} r27={9d} r28={8d} r29={8d} r30={8d} r31={8d} r32={8d} r33={8d} r34={8d} r35={8d} r36={9d} r37={9d} r38={8d} r39={8d} r44={8d} r45={8d} r46={8d} r47={8d} r48={8d} r49={8d} r50={8d} r51={8d} r52={8d} r53={8d} r54={8d} r55={8d} r56={8d} r57={8d} r58={8d} r59={8d} r60={8d} r61={8d} r62={8d} r63={8d} r64={8d} r65={8d} r66={8d} r67={8d} r68={8d} r69={8d} r70={8d} r71={8d} r72={8d} r73={8d} r74={8d} r75={8d} r82={1d,1u} r83={1d,1u} r84={1d,1u} r85={1d,1u} r86={1d,1u} r87={1d,1u} r88={1d,1u} r89={1d,1u} r90={1d,1u} r91={1d,1u} r92={1d,1u} r93={1d,1u} r94={1d,1u} r95={1d,1u} r96={1d,1u} r97={1d,1u} 
+;;    total ref usage 684{592d,92u,0e} in 53{45 regular + 8 call} insns.
+(note 1 0 4 NOTE_INSN_DELETED)
+(note 4 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 4 3 2 NOTE_INSN_FUNCTION_BEG)
+(insn 3 2 6 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 19 frame)
+                        (const_int -8 [0xfffffffffffffff8])) [6 D.40001+0 S8 A64])
+                (unspec:DI [
+                        (mem/v/f:DI (const_int 40 [0x28]) [0 MEM[(<address-space-1> long unsigned int *)40B]+0 S8 A64 AS1])
+                    ] UNSPEC_SP_SET))
+            (set (scratch:DI)
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":7:1 976 {stack_protect_set_di}
+     (expr_list:REG_UNUSED (reg:CC 17 flags)
+        (nil)))
+(insn 6 3 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])
+        (const_int 0 [0])) "prework1.cpp":9:7 67 {*movsi_internal}
+     (nil))
+(insn 7 6 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])
+        (const_int 1 [0x1])) "prework1.cpp":10:7 67 {*movsi_internal}
+     (nil))
+(insn 8 7 9 2 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+        (const_int 1 [0x1])) "prework1.cpp":11:7 67 {*movsi_internal}
+     (nil))
+(insn 9 8 10 2 (parallel [
+            (set (reg:DI 88)
+                (plus:DI (reg/f:DI 19 frame)
+                    (const_int -28 [0xffffffffffffffe4])))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":12:12 191 {*adddi_1}
+     (expr_list:REG_UNUSED (reg:CC 17 flags)
+        (nil)))
+(insn 10 9 11 2 (set (reg:DI 4 si)
+        (reg:DI 88)) "prework1.cpp":12:12 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 88)
+        (nil)))
+(insn 11 10 12 2 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt3cin") [flags 0x40]  <var_decl 0x7efe0e7352d0 cin>)) "prework1.cpp":12:12 66 {*movdi_internal}
+     (nil))
+(call_insn 12 11 13 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSirsERi") [flags 0x41]  <function_decl 0x7efe0ea25e00 operator>>>) [0 operator>> S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":12:12 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:DI 4 si)
+            (expr_list:REG_UNUSED (reg:DI 0 ax)
+                (nil))))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 13 12 14 2 (set (reg:SI 89)
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])) "prework1.cpp":13:13 67 {*movsi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 4 si)
+        (reg:SI 89)) "prework1.cpp":13:13 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 89)
+        (nil)))
+(insn 15 14 16 2 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt4cout") [flags 0x40]  <var_decl 0x7efe0e735360 cout>)) "prework1.cpp":13:13 66 {*movdi_internal}
+     (nil))
+(call_insn 16 15 17 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEi") [flags 0x41]  <function_decl 0x7efe0e9b9e00 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":13:13 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:SI 4 si)
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 17 16 18 2 (set (reg/f:DI 82 [ _1 ])
+        (reg:DI 0 ax)) "prework1.cpp":13:13 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 0 ax)
+        (nil)))
+(insn 18 17 19 2 (set (reg:DI 90)
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "prework1.cpp":13:18 66 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg:DI 4 si)
+        (reg:DI 90)) "prework1.cpp":13:18 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 90)
+        (expr_list:REG_EQUAL (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+            (nil))))
+(insn 20 19 21 2 (set (reg:DI 5 di)
+        (reg/f:DI 82 [ _1 ])) "prework1.cpp":13:18 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg/f:DI 82 [ _1 ])
+        (nil)))
+(call_insn 21 20 22 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEPFRSoS_E") [flags 0x41]  <function_decl 0x7efe0e9b9600 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":13:18 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:DI 4 si)
+            (expr_list:REG_UNUSED (reg:DI 0 ax)
+                (nil))))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 22 21 23 2 (set (reg:SI 91)
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])) "prework1.cpp":14:13 67 {*movsi_internal}
+     (nil))
+(insn 23 22 24 2 (set (reg:SI 4 si)
+        (reg:SI 91)) "prework1.cpp":14:13 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 91)
+        (nil)))
+(insn 24 23 25 2 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt4cout") [flags 0x40]  <var_decl 0x7efe0e735360 cout>)) "prework1.cpp":14:13 66 {*movdi_internal}
+     (nil))
+(call_insn 25 24 26 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEi") [flags 0x41]  <function_decl 0x7efe0e9b9e00 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":14:13 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:SI 4 si)
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 26 25 27 2 (set (reg/f:DI 83 [ _2 ])
+        (reg:DI 0 ax)) "prework1.cpp":14:13 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 0 ax)
+        (nil)))
+(insn 27 26 28 2 (set (reg:DI 92)
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "prework1.cpp":14:18 66 {*movdi_internal}
+     (nil))
+(insn 28 27 29 2 (set (reg:DI 4 si)
+        (reg:DI 92)) "prework1.cpp":14:18 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 92)
+        (expr_list:REG_EQUAL (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+            (nil))))
+(insn 29 28 30 2 (set (reg:DI 5 di)
+        (reg/f:DI 83 [ _2 ])) "prework1.cpp":14:18 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg/f:DI 83 [ _2 ])
+        (nil)))
+(call_insn 30 29 52 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEPFRSoS_E") [flags 0x41]  <function_decl 0x7efe0e9b9600 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":14:18 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:DI 4 si)
+            (expr_list:REG_UNUSED (reg:DI 0 ax)
+                (nil))))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(code_label 52 30 31 3 3 (nil) [1 uses])
+(note 31 52 32 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 32 31 33 3 (set (reg:SI 84 [ n.0_3 ])
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -28 [0xffffffffffffffe4])) [7 n+0 S4 A32])) "prework1.cpp":15:5 67 {*movsi_internal}
+     (nil))
+(insn 33 32 34 3 (set (reg:CCGC 17 flags)
+        (compare:CCGC (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                    (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+            (reg:SI 84 [ n.0_3 ]))) "prework1.cpp":15:5 11 {*cmpsi_1}
+     (expr_list:REG_DEAD (reg:SI 84 [ n.0_3 ])
+        (nil)))
+(jump_insn 34 33 35 3 (set (pc)
+        (if_then_else (ge (reg:CCGC 17 flags)
+                (const_int 0 [0]))
+            (label_ref 55)
+            (pc))) "prework1.cpp":15:5 659 {*jcc}
+     (expr_list:REG_DEAD (reg:CCGC 17 flags)
+        (nil))
+ -> 55)
+(note 35 34 36 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 36 35 37 4 (set (reg:SI 93)
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])) "prework1.cpp":17:11 67 {*movsi_internal}
+     (nil))
+(insn 37 36 38 4 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -12 [0xfffffffffffffff4])) [7 t+0 S4 A32])
+        (reg:SI 93)) "prework1.cpp":17:11 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 93)
+        (nil)))
+(insn 38 37 39 4 (set (reg:SI 94)
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])) "prework1.cpp":18:11 67 {*movsi_internal}
+     (nil))
+(insn 39 38 40 4 (parallel [
+            (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                        (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])
+                (plus:SI (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                            (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])
+                    (reg:SI 94)))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":18:11 190 {*addsi_1}
+     (expr_list:REG_DEAD (reg:SI 94)
+        (expr_list:REG_UNUSED (reg:CC 17 flags)
+            (nil))))
+(insn 40 39 41 4 (set (reg:SI 95)
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])) "prework1.cpp":19:17 67 {*movsi_internal}
+     (nil))
+(insn 41 40 42 4 (set (reg:SI 4 si)
+        (reg:SI 95)) "prework1.cpp":19:17 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 95)
+        (nil)))
+(insn 42 41 43 4 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt4cout") [flags 0x40]  <var_decl 0x7efe0e735360 cout>)) "prework1.cpp":19:17 66 {*movdi_internal}
+     (nil))
+(call_insn 43 42 44 4 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEi") [flags 0x41]  <function_decl 0x7efe0e9b9e00 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":19:17 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:SI 4 si)
+            (nil)))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 44 43 45 4 (set (reg/f:DI 85 [ _4 ])
+        (reg:DI 0 ax)) "prework1.cpp":19:17 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 0 ax)
+        (nil)))
+(insn 45 44 46 4 (set (reg:DI 96)
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "prework1.cpp":19:22 66 {*movdi_internal}
+     (nil))
+(insn 46 45 47 4 (set (reg:DI 4 si)
+        (reg:DI 96)) "prework1.cpp":19:22 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 96)
+        (expr_list:REG_EQUAL (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+            (nil))))
+(insn 47 46 48 4 (set (reg:DI 5 di)
+        (reg/f:DI 85 [ _4 ])) "prework1.cpp":19:22 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg/f:DI 85 [ _4 ])
+        (nil)))
+(call_insn 48 47 49 4 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEPFRSoS_E") [flags 0x41]  <function_decl 0x7efe0e9b9600 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":19:22 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:DI 4 si)
+            (expr_list:REG_UNUSED (reg:DI 0 ax)
+                (nil))))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 49 48 50 4 (set (reg:SI 97)
+        (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -12 [0xfffffffffffffff4])) [7 t+0 S4 A32])) "prework1.cpp":20:11 67 {*movsi_internal}
+     (nil))
+(insn 50 49 51 4 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])
+        (reg:SI 97)) "prework1.cpp":20:11 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 97)
+        (nil)))
+(insn 51 50 74 4 (parallel [
+            (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                        (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+                (plus:SI (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                            (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+                    (const_int 1 [0x1])))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":21:11 190 {*addsi_1}
+     (expr_list:REG_UNUSED (reg:CC 17 flags)
+        (nil)))
+(jump_insn 74 51 75 4 (set (pc)
+        (label_ref 52)) "prework1.cpp":15:5 660 {jump}
+     (nil)
+ -> 52)
+(barrier 75 74 55)
+(code_label 55 75 56 5 2 (nil) [1 uses])
+(note 56 55 57 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 57 56 60 5 (set (reg:SI 86 [ _29 ])
+        (const_int 0 [0])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(insn 60 57 64 5 (set (reg:SI 87 [ <retval> ])
+        (reg:SI 86 [ _29 ])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 86 [ _29 ])
+        (nil)))
+(insn 64 60 65 5 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 19 frame)
+                                (const_int -8 [0xfffffffffffffff8])) [6 D.40001+0 S8 A64])
+                        (mem/v/f:DI (const_int 40 [0x28]) [0 MEM[(<address-space-1> long unsigned int *)40B]+0 S8 A64 AS1])
+                    ] UNSPEC_SP_TEST))
+            (clobber (scratch:DI))
+        ]) "prework1.cpp":23:1 978 {stack_protect_test_di}
+     (nil))
+(jump_insn 65 64 72 5 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 68)
+            (pc))) "prework1.cpp":23:1 659 {*jcc}
+     (expr_list:REG_DEAD (reg:CCZ 17 flags)
+        (nil))
+ -> 68)
+(note 72 65 66 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(call_insn 66 72 67 6 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7efe0e664000 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "prework1.cpp":23:1 666 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 67 66 68)
+(code_label 68 67 73 7 5 (nil) [1 uses])
+(note 73 68 69 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 69 73 70 7 (set (reg/i:SI 0 ax)
+        (reg:SI 87 [ <retval> ])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 87 [ <retval> ])
+        (nil)))
+(insn 70 69 0 7 (use (reg/i:SI 0 ax)) "prework1.cpp":23:1 -1
+     (nil))
+
+;; Function __static_initialization_and_destruction_0 (_Z41__static_initialization_and_destruction_0ii, funcdef_no=2008, decl_uid=39975, cgraph_uid=922, symbol_order=948)
+
+starting the processing of deferred insns
+ending the processing of deferred insns
+df_analyze called
+df_worklist_dataflow_doublequeue: n_basic_blocks 7 n_edges 8 count 7 (    1)
+;; 1 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2 3 4 6 5
+;; 2 succs { 3 6 }
+;; 3 succs { 4 6 }
+;; 4 succs { 6 }
+;; 6 succs { 5 }
+;; 5 succs { 1 }
+Building IRA IR
+verify found no changes in insn with uid = 14.
+verify found no changes in insn with uid = 19.
+starting the processing of deferred insns
+ending the processing of deferred insns
+df_analyze called
+
+Pass 0 for finding pseudo/allocno costs
+
+    r82: preferred DIREG, alternative GENERAL_REGS, allocno GENERAL_REGS
+    a0 (r82,l0) best DIREG, allocno GENERAL_REGS
+
+  a0(r82,l0) costs: AREG:2000 DREG:2000 CREG:2000 BREG:2000 SIREG:2000 DIREG:2000 AD_REGS:2000 CLOBBERED_REGS:2000 Q_REGS:2000 TLS_GOTBASE_REGS:2000 GENERAL_REGS:2000 SSE_FIRST_REG:16000 NO_REX_SSE_REGS:16000 SSE_REGS:16000 MMX_REGS:25000 INT_SSE_REGS:25000 ALL_REGS:318000 MEM:12000
+
+   Insn 25(l0): point = 1
+   Insn 19(l0): point = 4
+   Insn 18(l0): point = 6
+   Insn 17(l0): point = 8
+   Insn 16(l0): point = 10
+   Insn 15(l0): point = 12
+   Insn 14(l0): point = 14
+   Insn 13(l0): point = 16
+   Insn 11(l0): point = 19
+   Insn 10(l0): point = 21
+   Insn 8(l0): point = 24
+   Insn 7(l0): point = 26
+   Insn 3(l0): point = 28
+   Insn 2(l0): point = 30
+ a0(r82): [7..8]
+Compressing live ranges: from 33 to 2 - 6%
+Ranges after the compression:
+ a0(r82): [0..1]
+  pref0:a0(r82)<-hr5@1500
+  regions=1, blocks=7, points=2
+    allocnos=1 (big 0), copies=0, conflicts=0, ranges=1
+Disposition:
+    0:r82  l0     0
++++Costs: overall -1000, reg -1000, mem 0, ld 0, st 0, move 0
++++       move loops 0, new jumps 0
+
+
+__static_initialization_and_destruction_0
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 28 [mm0] 29 [mm1] 30 [mm2] 31 [mm3] 32 [mm4] 33 [mm5] 34 [mm6] 35 [mm7] 36 [r8] 37 [r9] 38 [r10] 39 [r11] 44 [xmm8] 45 [xmm9] 46 [xmm10] 47 [xmm11] 48 [xmm12] 49 [xmm13] 50 [xmm14] 51 [xmm15] 52 [] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 []
+;;  hardware regs used 	 7 [sp] 16 [argp] 19 [frame]
+;;  regular block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 16 [argp] 19 [frame] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 36 [r8] 37 [r9]
+;;  exit block uses 	 6 [bp] 7 [sp] 19 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags]
+;;  ref usage 	r0={3d} r1={4d,1u} r2={3d} r4={4d,2u} r5={5d,3u} r6={1d,6u} r7={1d,8u} r8={2d} r9={2d} r10={2d} r11={2d} r12={2d} r13={2d} r14={2d} r15={2d} r16={1d,5u} r17={4d,2u} r18={2d} r19={1d,10u} r20={3d} r21={3d} r22={3d} r23={3d} r24={3d} r25={3d} r26={3d} r27={3d} r28={2d} r29={2d} r30={2d} r31={2d} r32={2d} r33={2d} r34={2d} r35={2d} r36={3d} r37={3d} r38={2d} r39={2d} r44={2d} r45={2d} r46={2d} r47={2d} r48={2d} r49={2d} r50={2d} r51={2d} r52={2d} r53={2d} r54={2d} r55={2d} r56={2d} r57={2d} r58={2d} r59={2d} r60={2d} r61={2d} r62={2d} r63={2d} r64={2d} r65={2d} r66={2d} r67={2d} r68={2d} r69={2d} r70={2d} r71={2d} r72={2d} r73={2d} r74={2d} r75={2d} r82={1d,1u} 
+;;    total ref usage 198{160d,38u,0e} in 14{12 regular + 2 call} insns.
+(note 1 0 5 NOTE_INSN_DELETED)
+(note 5 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 5 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -4 [0xfffffffffffffffc])) [7 __initialize_p+0 S4 A32])
+        (reg:SI 5 di [ __initialize_p ])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 5 di [ __initialize_p ])
+        (nil)))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                (const_int -8 [0xfffffffffffffff8])) [7 __priority+0 S4 A32])
+        (reg:SI 4 si [ __priority ])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (expr_list:REG_DEAD (reg:SI 4 si [ __priority ])
+        (nil)))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                    (const_int -4 [0xfffffffffffffffc])) [7 __initialize_p+0 S4 A32])
+            (const_int 1 [0x1]))) "prework1.cpp":23:1 11 {*cmpsi_1}
+     (nil))
+(jump_insn 8 7 9 2 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "prework1.cpp":23:1 659 {*jcc}
+     (expr_list:REG_DEAD (reg:CCZ 17 flags)
+        (nil))
+ -> 26)
+(note 9 8 10 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 10 9 11 3 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 19 frame)
+                    (const_int -8 [0xfffffffffffffff8])) [7 __priority+0 S4 A32])
+            (const_int 65535 [0xffff]))) "prework1.cpp":23:1 11 {*cmpsi_1}
+     (nil))
+(jump_insn 11 10 12 3 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "prework1.cpp":23:1 659 {*jcc}
+     (expr_list:REG_DEAD (reg:CCZ 17 flags)
+        (nil))
+ -> 26)
+(note 12 11 13 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 4 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7efe0e735900 __ioinit>)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(call_insn 14 13 15 4 (call (mem:QI (symbol_ref:DI ("_ZNSt8ios_base4InitC1Ev") [flags 0x41]  <function_decl 0x7efe0ee65a00 __ct_comp >) [0 __ct_comp  S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/9/iostream":74:25 666 {*call}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 15 14 16 4 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("__dso_handle") [flags 0x42]  <var_decl 0x7efe0e637000 __dso_handle>)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(insn 16 15 17 4 (set (reg:DI 4 si)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7efe0e735900 __ioinit>)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(insn 17 16 18 4 (set (reg:DI 82)
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7efe0ee65c00 __dt_comp >)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(insn 18 17 19 4 (set (reg:DI 5 di)
+        (reg:DI 82)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (expr_list:REG_DEAD (reg:DI 82)
+        (expr_list:REG_EQUAL (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7efe0ee65c00 __dt_comp >)
+            (nil))))
+(call_insn 19 18 26 4 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_atexit") [flags 0x41]  <function_decl 0x7efe0e62ec00 __cxa_atexit>) [0 __cxa_atexit S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/9/iostream":74:25 677 {*call_value}
+     (expr_list:REG_DEAD (reg:DI 5 di)
+        (expr_list:REG_DEAD (reg:DI 4 si)
+            (expr_list:REG_DEAD (reg:DI 1 dx)
+                (expr_list:REG_UNUSED (reg:SI 0 ax)
+                    (expr_list:REG_EH_REGION (const_int 0 [0])
+                        (nil))))))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(code_label 26 19 24 6 8 (nil) [2 uses])
+(note 24 26 25 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 25 24 22 6 (const_int 0 [0]) "prework1.cpp":23:1 696 {nop}
+     (nil))
+(code_label 22 25 23 5 6 (nil) [0 uses])
+(note 23 22 0 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+
+;; Function _GLOBAL__sub_I_main (_GLOBAL__sub_I_main, funcdef_no=2009, decl_uid=39981, cgraph_uid=923, symbol_order=1078)
+
+starting the processing of deferred insns
+ending the processing of deferred insns
+df_analyze called
+df_worklist_dataflow_doublequeue: n_basic_blocks 3 n_edges 2 count 3 (    1)
+;; 1 loops found
+;;
+;; Loop 0
+;;  header 0, latch 1
+;;  depth 0, outer -1
+;;  nodes: 0 1 2
+;; 2 succs { 1 }
+Building IRA IR
+verify found no changes in insn with uid = 7.
+starting the processing of deferred insns
+ending the processing of deferred insns
+df_analyze called
+
+Pass 0 for finding pseudo/allocno costs
+
+
+
+   Insn 7(l0): point = 0
+   Insn 6(l0): point = 2
+   Insn 5(l0): point = 4
+Compressing live ranges: from 7 to 0 - 0%
+Ranges after the compression:
+  regions=1, blocks=3, points=0
+    allocnos=0 (big 0), copies=0, conflicts=0, ranges=0
+Disposition:
++++Costs: overall 0, reg 0, mem 0, ld 0, st 0, move 0
++++       move loops 0, new jumps 0
+
+
+_GLOBAL__sub_I_main
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 28 [mm0] 29 [mm1] 30 [mm2] 31 [mm3] 32 [mm4] 33 [mm5] 34 [mm6] 35 [mm7] 36 [r8] 37 [r9] 38 [r10] 39 [r11] 44 [xmm8] 45 [xmm9] 46 [xmm10] 47 [xmm11] 48 [xmm12] 49 [xmm13] 50 [xmm14] 51 [xmm15] 52 [] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 []
+;;  hardware regs used 	 7 [sp] 16 [argp] 19 [frame]
+;;  regular block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 16 [argp] 19 [frame] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 36 [r8] 37 [r9]
+;;  exit block uses 	 6 [bp] 7 [sp] 19 [frame]
+;;  regs ever live 	 4 [si] 5 [di] 6 [bp] 7 [sp]
+;;  ref usage 	r0={2d} r1={2d} r2={2d} r4={3d,1u} r5={3d,1u} r6={1d,2u} r7={1d,3u} r8={1d} r9={1d} r10={1d} r11={1d} r12={1d} r13={1d} r14={1d} r15={1d} r16={1d,1u} r17={1d} r18={1d} r19={1d,2u} r20={2d} r21={2d} r22={2d} r23={2d} r24={2d} r25={2d} r26={2d} r27={2d} r28={1d} r29={1d} r30={1d} r31={1d} r32={1d} r33={1d} r34={1d} r35={1d} r36={2d} r37={2d} r38={1d} r39={1d} r44={1d} r45={1d} r46={1d} r47={1d} r48={1d} r49={1d} r50={1d} r51={1d} r52={1d} r53={1d} r54={1d} r55={1d} r56={1d} r57={1d} r58={1d} r59={1d} r60={1d} r61={1d} r62={1d} r63={1d} r64={1d} r65={1d} r66={1d} r67={1d} r68={1d} r69={1d} r70={1d} r71={1d} r72={1d} r73={1d} r74={1d} r75={1d} 
+;;    total ref usage 98{88d,10u,0e} in 3{2 regular + 1 call} insns.
+(note 1 0 3 NOTE_INSN_DELETED)
+(note 3 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(note 2 3 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (reg:SI 4 si)
+        (const_int 65535 [0xffff])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(insn 6 5 7 2 (set (reg:SI 5 di)
+        (const_int 1 [0x1])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(call_insn 7 6 0 2 (call (mem:QI (symbol_ref:DI ("_Z41__static_initialization_and_destruction_0ii") [flags 0x3]  <function_decl 0x7efe0e62ea00 __static_initialization_and_destruction_0>) [0 __static_initialization_and_destruction_0 S1 A8])
+        (const_int 0 [0])) "prework1.cpp":23:1 666 {*call}
+     (expr_list:REG_DEAD (reg:SI 5 di)
+        (expr_list:REG_DEAD (reg:SI 4 si)
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (expr_list:SI (use (reg:SI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))

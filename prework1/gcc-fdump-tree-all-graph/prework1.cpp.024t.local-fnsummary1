@@ -1,0 +1,184 @@
+
+;; Function main (main, funcdef_no=1522, decl_uid=36325, cgraph_uid=436, symbol_order=438)
+
+
+Analyzing function body size: int main()
+
+IPA function summary for int main()/438
+  global time:     94.000000
+  self size:       32
+  global size:     0
+  min size:       0
+  self stack:      0
+  global stack:    0
+    size:6.000000, time:7.000000
+    size:2.000000, time:0.000000,  executed if:(not inlined)
+  calls:
+    std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>]/676 function body not available
+      loop depth: 1 freq:1.00 size: 3 time: 12
+    std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]/1081 function body not available
+      loop depth: 1 freq:1.00 size: 4 time: 13
+    std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>]/676 function body not available
+      loop depth: 0 freq:1.00 size: 3 time: 12
+    std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]/1081 function body not available
+      loop depth: 0 freq:1.00 size: 4 time: 13
+    std::basic_ostream<_CharT, _Traits>::__ostream_type& std::basic_ostream<_CharT, _Traits>::operator<<(std::basic_ostream<_CharT, _Traits>::__ostream_type& (*)(std::basic_ostream<_CharT, _Traits>::__ostream_type&)) [with _CharT = char; _Traits = std::char_traits<char>]/676 function body not available
+      loop depth: 0 freq:1.00 size: 3 time: 12
+    std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char; _Traits = std::char_traits<char>]/1081 function body not available
+      loop depth: 0 freq:1.00 size: 4 time: 13
+    std::basic_istream<_CharT, _Traits>& std::basic_istream<_CharT, _Traits>::operator>>(int&) [with _CharT = char; _Traits = std::char_traits<char>]/1079 function body not available
+      loop depth: 0 freq:1.00 size: 3 time: 12
+
+main ()
+{
+  struct basic_ostream & D.39989;
+  struct basic_ostream & D.39988;
+  struct basic_ostream & D.39987;
+  int n;
+  int t;
+  int i;
+  int b;
+  int a;
+  int D.39985;
+  struct basic_ostream & _1;
+  struct basic_ostream & _2;
+  int n.0_3;
+  struct basic_ostream & _4;
+  struct basic_ostream & _16;
+  struct basic_ostream & _19;
+  struct basic_ostream & _24;
+  int _29;
+
+  <bb 2> :
+  a_10 = 0;
+  b_11 = 1;
+  i_12 = 1;
+  std::basic_istream<char>::operator>> (&cin, &n);
+
+  <bb 3> :
+  _16 = std::basic_ostream<char>::operator<< (&cout, a_10);
+
+  <bb 4> :
+  _1 = _16;
+  std::basic_ostream<char>::operator<< (_1, endl);
+
+  <bb 5> :
+  _19 = std::basic_ostream<char>::operator<< (&cout, b_11);
+
+  <bb 6> :
+  _2 = _19;
+  std::basic_ostream<char>::operator<< (_2, endl);
+
+  <bb 7> :
+  # a_5 = PHI <a_10(6), a_26(10)>
+  # b_6 = PHI <b_11(6), b_22(10)>
+  # i_7 = PHI <i_12(6), i_27(10)>
+  n.0_3 = n;
+  if (i_7 >= n.0_3)
+    goto <bb 11>; [INV]
+  else
+    goto <bb 8>; [INV]
+
+  <bb 8> :
+  t_21 = b_6;
+  b_22 = a_5 + b_6;
+  _24 = std::basic_ostream<char>::operator<< (&cout, b_22);
+
+  <bb 9> :
+  _4 = _24;
+  std::basic_ostream<char>::operator<< (_4, endl);
+
+  <bb 10> :
+  a_26 = t_21;
+  i_27 = i_7 + 1;
+  goto <bb 7>; [INV]
+
+  <bb 11> :
+  n ={v} {CLOBBER};
+  _29 = 0;
+
+  <bb 12> :
+<L3>:
+  return _29;
+
+  <bb 13> :
+<L4>:
+  n ={v} {CLOBBER};
+  resx 1
+
+}
+
+
+
+;; Function __static_initialization_and_destruction_0 (_Z41__static_initialization_and_destruction_0ii, funcdef_no=2008, decl_uid=39975, cgraph_uid=922, symbol_order=948)
+
+
+Analyzing function body size: void __static_initialization_and_destruction_0(int, int)
+
+IPA function summary for void __static_initialization_and_destruction_0(int, int)/948
+  global time:     30.000000
+  self size:       13
+  global size:     0
+  min size:       0
+  self stack:      0
+  global stack:    0
+    size:5.000000, time:6.000000
+    size:2.000000, time:0.000000,  executed if:(not inlined)
+  calls:
+    int __cxa_atexit(void (*)(void*), void*, void*)/1085 function body not available
+      loop depth: 0 freq:1.00 size: 4 time: 13
+    std::ios_base::Init::Init()/1084 function body not available
+      loop depth: 0 freq:1.00 size: 2 time: 11
+
+__static_initialization_and_destruction_0 (int __initialize_p, int __priority)
+{
+  <bb 2> :
+  if (__initialize_p_2(D) == 1)
+    goto <bb 3>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 3> :
+  if (__priority_4(D) == 65535)
+    goto <bb 4>; [INV]
+  else
+    goto <bb 5>; [INV]
+
+  <bb 4> :
+  std::ios_base::Init::Init (&__ioinit);
+  __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+
+  <bb 5> :
+  return;
+
+}
+
+
+
+;; Function _GLOBAL__sub_I_main (_GLOBAL__sub_I_main, funcdef_no=2009, decl_uid=39981, cgraph_uid=923, symbol_order=1078)
+
+
+Analyzing function body size: (static initializers for prework1/prework1.cpp)
+
+IPA function summary for (static initializers for prework1/prework1.cpp)/1078
+  global time:     14.000000
+  self size:       6
+  global size:     0
+  min size:       0
+  self stack:      0
+  global stack:    0
+    size:1.000000, time:2.000000
+    size:2.000000, time:0.000000,  executed if:(not inlined)
+  calls:
+    void __static_initialization_and_destruction_0(int, int)/948 function not considered for inlining
+      loop depth: 0 freq:1.00 size: 3 time: 12callee size: 6 stack: 0
+
+_GLOBAL__sub_I_main ()
+{
+  <bb 2> :
+  __static_initialization_and_destruction_0 (1, 65535);
+  return;
+
+}
+
+

@@ -1,0 +1,576 @@
+
+;; Function main (main, funcdef_no=1522, decl_uid=36325, cgraph_uid=436, symbol_order=438)
+
+Creating trace 0 : start at note 1
+Creating trace 1 : start at note 81
+Creating trace 2 : start at code_label 52
+Creating trace 3 : start at code_label 55
+Creating trace 4 : start at code_label 68
+Creating trace 5 : start at note 82
+Processing trace 0 : start at note 1
+   saw edge from trace 0 to 1 (via fallthru 0)
+	push trace 1 to worklist
+Processing trace 1 : start at note 81
+   saw edge from trace 1 to 2 (via fallthru 0)
+	push trace 2 to worklist
+Processing trace 2 : start at code_label 52
+   saw edge from trace 2 to 3 (via jump_insn 34)
+	push trace 3 to worklist
+   saw edge from trace 2 to 2 (via jump_insn 74)
+Processing trace 3 : start at code_label 55
+   saw edge from trace 3 to 4 (via jump_insn 65)
+	push trace 4 to worklist
+Processing trace 4 : start at code_label 68
+   saw edge from trace 4 to 5 (via fallthru 0)
+	push trace 5 to worklist
+Processing trace 5 : start at note 82
+
+
+main
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 28 [mm0] 29 [mm1] 30 [mm2] 31 [mm3] 32 [mm4] 33 [mm5] 34 [mm6] 35 [mm7] 36 [r8] 37 [r9] 38 [r10] 39 [r11] 44 [xmm8] 45 [xmm9] 46 [xmm10] 47 [xmm11] 48 [xmm12] 49 [xmm13] 50 [xmm14] 51 [xmm15] 52 [] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 19 [frame] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 36 [r8] 37 [r9]
+;;  exit block uses 	 0 [ax] 6 [bp] 7 [sp] 19 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags]
+;;  ref usage 	r0={22d,16u} r1={12d,3u} r2={10d} r4={16d,7u} r5={16d,7u} r6={3d,30u} r7={4d,20u} r8={8d} r9={8d} r10={8d} r11={8d} r12={8d} r13={8d} r14={8d} r15={8d} r17={14d,2u} r18={8d} r19={1d,1u} r20={9d} r21={9d} r22={9d} r23={9d} r24={9d} r25={9d} r26={9d} r27={9d} r28={8d} r29={8d} r30={8d} r31={8d} r32={8d} r33={8d} r34={8d} r35={8d} r36={9d} r37={9d} r38={8d} r39={8d} r44={8d} r45={8d} r46={8d} r47={8d} r48={8d} r49={8d} r50={8d} r51={8d} r52={8d} r53={8d} r54={8d} r55={8d} r56={8d} r57={8d} r58={8d} r59={8d} r60={8d} r61={8d} r62={8d} r63={8d} r64={8d} r65={8d} r66={8d} r67={8d} r68={8d} r69={8d} r70={8d} r71={8d} r72={8d} r73={8d} r74={8d} r75={8d} 
+;;    total ref usage 682{596d,86u,0e} in 56{48 regular + 8 call} insns.
+(note 1 0 86 NOTE_INSN_DELETED)
+(insn 86 1 4 2 (unspec_volatile [
+            (const_int 0 [0])
+        ] UNSPECV_NOP_ENDBR) 1058 {nop_endbr}
+     (nil))
+(note 4 86 78 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 78 4 87 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "prework1.cpp":7:1 42 {*pushdi2_rex64}
+     (nil))
+(note 87 78 88 2
+	.cfi_def_cfa_offset 16
+	 NOTE_INSN_CFI)
+(note 88 87 79 2
+	.cfi_offset 6, -16
+	 NOTE_INSN_CFI)
+(insn/f 79 88 89 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "prework1.cpp":7:1 66 {*movdi_internal}
+     (nil))
+(note 89 79 80 2
+	.cfi_def_cfa_register 6
+	 NOTE_INSN_CFI)
+(insn/f 80 89 81 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -32 [0xffffffffffffffe0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "prework1.cpp":7:1 959 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 81 80 2 2 NOTE_INSN_PROLOGUE_END)
+(note 2 81 3 2 NOTE_INSN_FUNCTION_BEG)
+(insn 3 2 6 2 (parallel [
+            (set (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -8 [0xfffffffffffffff8])) [6 D.40001+0 S8 A64])
+                (unspec:DI [
+                        (mem/v/f:DI (const_int 40 [0x28]) [0 MEM[(<address-space-1> long unsigned int *)40B]+0 S8 A64 AS1])
+                    ] UNSPEC_SP_SET))
+            (set (reg:DI 0 ax [99])
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":7:1 976 {stack_protect_set_di}
+     (nil))
+(insn 6 3 7 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])
+        (const_int 0 [0])) "prework1.cpp":9:7 67 {*movsi_internal}
+     (nil))
+(insn 7 6 8 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])
+        (const_int 1 [0x1])) "prework1.cpp":10:7 67 {*movsi_internal}
+     (nil))
+(insn 8 7 77 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+        (const_int 1 [0x1])) "prework1.cpp":11:7 67 {*movsi_internal}
+     (nil))
+(insn 77 8 10 2 (set (reg:DI 0 ax [88])
+        (plus:DI (reg/f:DI 6 bp)
+            (const_int -28 [0xffffffffffffffe4]))) "prework1.cpp":12:12 187 {*leadi}
+     (nil))
+(insn 10 77 11 2 (set (reg:DI 4 si)
+        (reg:DI 0 ax [88])) "prework1.cpp":12:12 66 {*movdi_internal}
+     (nil))
+(insn 11 10 12 2 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt3cin") [flags 0x40]  <var_decl 0x7efe0e7352d0 cin>)) "prework1.cpp":12:12 66 {*movdi_internal}
+     (nil))
+(call_insn 12 11 13 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSirsERi") [flags 0x41]  <function_decl 0x7efe0ea25e00 operator>>>) [0 operator>> S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":12:12 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 13 12 14 2 (set (reg:SI 0 ax [89])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])) "prework1.cpp":13:13 67 {*movsi_internal}
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 4 si)
+        (reg:SI 0 ax [89])) "prework1.cpp":13:13 67 {*movsi_internal}
+     (nil))
+(insn 15 14 16 2 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt4cout") [flags 0x40]  <var_decl 0x7efe0e735360 cout>)) "prework1.cpp":13:13 66 {*movdi_internal}
+     (nil))
+(call_insn 16 15 17 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEi") [flags 0x41]  <function_decl 0x7efe0e9b9e00 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":13:13 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 17 16 18 2 (set (reg/f:DI 1 dx [orig:82 _1 ] [82])
+        (reg:DI 0 ax)) "prework1.cpp":13:13 66 {*movdi_internal}
+     (nil))
+(insn 18 17 19 2 (set (reg:DI 0 ax [90])
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "prework1.cpp":13:18 66 {*movdi_internal}
+     (nil))
+(insn 19 18 20 2 (set (reg:DI 4 si)
+        (reg:DI 0 ax [90])) "prework1.cpp":13:18 66 {*movdi_internal}
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+        (nil)))
+(insn 20 19 21 2 (set (reg:DI 5 di)
+        (reg/f:DI 1 dx [orig:82 _1 ] [82])) "prework1.cpp":13:18 66 {*movdi_internal}
+     (nil))
+(call_insn 21 20 22 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEPFRSoS_E") [flags 0x41]  <function_decl 0x7efe0e9b9600 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":13:18 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 22 21 23 2 (set (reg:SI 0 ax [91])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])) "prework1.cpp":14:13 67 {*movsi_internal}
+     (nil))
+(insn 23 22 24 2 (set (reg:SI 4 si)
+        (reg:SI 0 ax [91])) "prework1.cpp":14:13 67 {*movsi_internal}
+     (nil))
+(insn 24 23 25 2 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt4cout") [flags 0x40]  <var_decl 0x7efe0e735360 cout>)) "prework1.cpp":14:13 66 {*movdi_internal}
+     (nil))
+(call_insn 25 24 26 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEi") [flags 0x41]  <function_decl 0x7efe0e9b9e00 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":14:13 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 26 25 27 2 (set (reg/f:DI 1 dx [orig:83 _2 ] [83])
+        (reg:DI 0 ax)) "prework1.cpp":14:13 66 {*movdi_internal}
+     (nil))
+(insn 27 26 28 2 (set (reg:DI 0 ax [92])
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "prework1.cpp":14:18 66 {*movdi_internal}
+     (nil))
+(insn 28 27 29 2 (set (reg:DI 4 si)
+        (reg:DI 0 ax [92])) "prework1.cpp":14:18 66 {*movdi_internal}
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+        (nil)))
+(insn 29 28 30 2 (set (reg:DI 5 di)
+        (reg/f:DI 1 dx [orig:83 _2 ] [83])) "prework1.cpp":14:18 66 {*movdi_internal}
+     (nil))
+(call_insn 30 29 52 2 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEPFRSoS_E") [flags 0x41]  <function_decl 0x7efe0e9b9600 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":14:18 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(code_label 52 30 31 3 3 (nil) [1 uses])
+(note 31 52 32 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 32 31 33 3 (set (reg:SI 0 ax [orig:84 n.0_3 ] [84])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -28 [0xffffffffffffffe4])) [7 n+0 S4 A32])) "prework1.cpp":15:5 67 {*movsi_internal}
+     (nil))
+(insn 33 32 34 3 (set (reg:CCGC 17 flags)
+        (compare:CCGC (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+            (reg:SI 0 ax [orig:84 n.0_3 ] [84]))) "prework1.cpp":15:5 11 {*cmpsi_1}
+     (nil))
+(jump_insn 34 33 35 3 (set (pc)
+        (if_then_else (ge (reg:CCGC 17 flags)
+                (const_int 0 [0]))
+            (label_ref 55)
+            (pc))) "prework1.cpp":15:5 659 {*jcc}
+     (nil)
+ -> 55)
+(note 35 34 36 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 36 35 37 4 (set (reg:SI 0 ax [93])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])) "prework1.cpp":17:11 67 {*movsi_internal}
+     (nil))
+(insn 37 36 38 4 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -12 [0xfffffffffffffff4])) [7 t+0 S4 A32])
+        (reg:SI 0 ax [93])) "prework1.cpp":17:11 67 {*movsi_internal}
+     (nil))
+(insn 38 37 39 4 (set (reg:SI 0 ax [94])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])) "prework1.cpp":18:11 67 {*movsi_internal}
+     (nil))
+(insn 39 38 40 4 (parallel [
+            (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])
+                (plus:SI (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                            (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])
+                    (reg:SI 0 ax [94])))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":18:11 190 {*addsi_1}
+     (nil))
+(insn 40 39 41 4 (set (reg:SI 0 ax [95])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -20 [0xffffffffffffffec])) [7 b+0 S4 A32])) "prework1.cpp":19:17 67 {*movsi_internal}
+     (nil))
+(insn 41 40 42 4 (set (reg:SI 4 si)
+        (reg:SI 0 ax [95])) "prework1.cpp":19:17 67 {*movsi_internal}
+     (nil))
+(insn 42 41 43 4 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZSt4cout") [flags 0x40]  <var_decl 0x7efe0e735360 cout>)) "prework1.cpp":19:17 66 {*movdi_internal}
+     (nil))
+(call_insn 43 42 44 4 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEi") [flags 0x41]  <function_decl 0x7efe0e9b9e00 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":19:17 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(insn 44 43 45 4 (set (reg/f:DI 1 dx [orig:85 _4 ] [85])
+        (reg:DI 0 ax)) "prework1.cpp":19:17 66 {*movdi_internal}
+     (nil))
+(insn 45 44 46 4 (set (reg:DI 0 ax [96])
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "prework1.cpp":19:22 66 {*movdi_internal}
+     (nil))
+(insn 46 45 47 4 (set (reg:DI 4 si)
+        (reg:DI 0 ax [96])) "prework1.cpp":19:22 66 {*movdi_internal}
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_") [flags 0x41]  <function_decl 0x7efe0e9d0e00 endl>)
+        (nil)))
+(insn 47 46 48 4 (set (reg:DI 5 di)
+        (reg/f:DI 1 dx [orig:85 _4 ] [85])) "prework1.cpp":19:22 66 {*movdi_internal}
+     (nil))
+(call_insn 48 47 49 4 (set (reg:DI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("_ZNSolsEPFRSoS_E") [flags 0x41]  <function_decl 0x7efe0e9b9600 operator<<>) [0 operator<< S1 A8])
+            (const_int 0 [0]))) "prework1.cpp":19:22 677 {*call_value}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (nil))))
+(insn 49 48 50 4 (set (reg:SI 0 ax [97])
+        (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -12 [0xfffffffffffffff4])) [7 t+0 S4 A32])) "prework1.cpp":20:11 67 {*movsi_internal}
+     (nil))
+(insn 50 49 51 4 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -24 [0xffffffffffffffe8])) [7 a+0 S4 A32])
+        (reg:SI 0 ax [97])) "prework1.cpp":20:11 67 {*movsi_internal}
+     (nil))
+(insn 51 50 74 4 (parallel [
+            (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                        (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+                (plus:SI (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                            (const_int -16 [0xfffffffffffffff0])) [7 i+0 S4 A32])
+                    (const_int 1 [0x1])))
+            (clobber (reg:CC 17 flags))
+        ]) "prework1.cpp":21:11 190 {*addsi_1}
+     (nil))
+(jump_insn 74 51 75 4 (set (pc)
+        (label_ref 52)) "prework1.cpp":15:5 660 {jump}
+     (nil)
+ -> 52)
+(barrier 75 74 55)
+(code_label 55 75 56 5 2 (nil) [1 uses])
+(note 56 55 57 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 57 56 64 5 (set (reg:SI 0 ax [orig:86 _29 ] [86])
+        (const_int 0 [0])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(insn 64 57 65 5 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:DI (plus:DI (reg/f:DI 6 bp)
+                                (const_int -8 [0xfffffffffffffff8])) [6 D.40001+0 S8 A64])
+                        (mem/v/f:DI (const_int 40 [0x28]) [0 MEM[(<address-space-1> long unsigned int *)40B]+0 S8 A64 AS1])
+                    ] UNSPEC_SP_TEST))
+            (clobber (reg:DI 2 cx [100]))
+        ]) "prework1.cpp":23:1 978 {stack_protect_test_di}
+     (nil))
+(jump_insn 65 64 72 5 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 68)
+            (pc))) "prework1.cpp":23:1 659 {*jcc}
+     (nil)
+ -> 68)
+(note 72 65 66 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(call_insn 66 72 67 6 (call (mem:QI (symbol_ref:DI ("__stack_chk_fail") [flags 0x41]  <function_decl 0x7efe0e664000 __stack_chk_fail>) [0 __stack_chk_fail S1 A8])
+        (const_int 0 [0])) "prework1.cpp":23:1 666 {*call}
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+(barrier 67 66 68)
+(code_label 68 67 73 7 5 (nil) [1 uses])
+(note 73 68 70 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 70 73 82 7 (use (reg/i:SI 0 ax)) "prework1.cpp":23:1 -1
+     (nil))
+(note 82 70 83 7 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 83 82 90 7 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "prework1.cpp":23:1 706 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(note 90 83 84 7
+	.cfi_def_cfa 7, 8
+	 NOTE_INSN_CFI)
+(jump_insn 84 90 85 7 (simple_return) "prework1.cpp":23:1 690 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 85 84 76)
+(note 76 85 0 NOTE_INSN_DELETED)
+
+;; Function __static_initialization_and_destruction_0 (_Z41__static_initialization_and_destruction_0ii, funcdef_no=2008, decl_uid=39975, cgraph_uid=922, symbol_order=948)
+
+Creating trace 0 : start at note 1
+Creating trace 1 : start at note 31
+Creating trace 2 : start at code_label 26
+Creating trace 3 : start at note 32
+Processing trace 0 : start at note 1
+   saw edge from trace 0 to 1 (via fallthru 0)
+	push trace 1 to worklist
+Processing trace 1 : start at note 31
+   saw edge from trace 1 to 2 (via jump_insn 8)
+	push trace 2 to worklist
+   saw edge from trace 1 to 2 (via jump_insn 11)
+   saw edge from trace 1 to 2 (via fallthru 0)
+Processing trace 2 : start at code_label 26
+   saw edge from trace 2 to 3 (via fallthru 0)
+	push trace 3 to worklist
+Processing trace 3 : start at note 32
+
+
+__static_initialization_and_destruction_0
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 28 [mm0] 29 [mm1] 30 [mm2] 31 [mm3] 32 [mm4] 33 [mm5] 34 [mm6] 35 [mm7] 36 [r8] 37 [r9] 38 [r10] 39 [r11] 44 [xmm8] 45 [xmm9] 46 [xmm10] 47 [xmm11] 48 [xmm12] 49 [xmm13] 50 [xmm14] 51 [xmm15] 52 [] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 19 [frame] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 36 [r8] 37 [r9]
+;;  exit block uses 	 6 [bp] 7 [sp] 19 [frame]
+;;  regs ever live 	 0 [ax] 1 [dx] 4 [si] 5 [di] 6 [bp] 7 [sp] 17 [flags]
+;;  ref usage 	r0={4d,1u} r1={4d,1u} r2={3d} r4={4d,2u} r5={5d,3u} r6={3d,12u} r7={4d,12u} r8={2d} r9={2d} r10={2d} r11={2d} r12={2d} r13={2d} r14={2d} r15={2d} r17={5d,2u} r18={2d} r19={1d,1u} r20={3d} r21={3d} r22={3d} r23={3d} r24={3d} r25={3d} r26={3d} r27={3d} r28={2d} r29={2d} r30={2d} r31={2d} r32={2d} r33={2d} r34={2d} r35={2d} r36={3d} r37={3d} r38={2d} r39={2d} r44={2d} r45={2d} r46={2d} r47={2d} r48={2d} r49={2d} r50={2d} r51={2d} r52={2d} r53={2d} r54={2d} r55={2d} r56={2d} r57={2d} r58={2d} r59={2d} r60={2d} r61={2d} r62={2d} r63={2d} r64={2d} r65={2d} r66={2d} r67={2d} r68={2d} r69={2d} r70={2d} r71={2d} r72={2d} r73={2d} r74={2d} r75={2d} 
+;;    total ref usage 199{165d,34u,0e} in 19{17 regular + 2 call} insns.
+(note 1 0 36 NOTE_INSN_DELETED)
+(insn 36 1 5 2 (unspec_volatile [
+            (const_int 0 [0])
+        ] UNSPECV_NOP_ENDBR) 1058 {nop_endbr}
+     (nil))
+(note 5 36 28 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 28 5 37 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "prework1.cpp":23:1 42 {*pushdi2_rex64}
+     (nil))
+(note 37 28 38 2
+	.cfi_def_cfa_offset 16
+	 NOTE_INSN_CFI)
+(note 38 37 29 2
+	.cfi_offset 6, -16
+	 NOTE_INSN_CFI)
+(insn/f 29 38 39 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "prework1.cpp":23:1 66 {*movdi_internal}
+     (nil))
+(note 39 29 30 2
+	.cfi_def_cfa_register 6
+	 NOTE_INSN_CFI)
+(insn/f 30 39 31 2 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 7 sp)
+                    (const_int -16 [0xfffffffffffffff0])))
+            (clobber (reg:CC 17 flags))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "prework1.cpp":23:1 959 {pro_epilogue_adjust_stack_di_add}
+     (nil))
+(note 31 30 2 2 NOTE_INSN_PROLOGUE_END)
+(insn 2 31 3 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -4 [0xfffffffffffffffc])) [7 __initialize_p+0 S4 A32])
+        (reg:SI 5 di [ __initialize_p ])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(insn 3 2 4 2 (set (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                (const_int -8 [0xfffffffffffffff8])) [7 __priority+0 S4 A32])
+        (reg:SI 4 si [ __priority ])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(note 4 3 7 2 NOTE_INSN_FUNCTION_BEG)
+(insn 7 4 8 2 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -4 [0xfffffffffffffffc])) [7 __initialize_p+0 S4 A32])
+            (const_int 1 [0x1]))) "prework1.cpp":23:1 11 {*cmpsi_1}
+     (nil))
+(jump_insn 8 7 9 2 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "prework1.cpp":23:1 659 {*jcc}
+     (nil)
+ -> 26)
+(note 9 8 10 3 [bb 3] NOTE_INSN_BASIC_BLOCK)
+(insn 10 9 11 3 (set (reg:CCZ 17 flags)
+        (compare:CCZ (mem/c:SI (plus:DI (reg/f:DI 6 bp)
+                    (const_int -8 [0xfffffffffffffff8])) [7 __priority+0 S4 A32])
+            (const_int 65535 [0xffff]))) "prework1.cpp":23:1 11 {*cmpsi_1}
+     (nil))
+(jump_insn 11 10 12 3 (set (pc)
+        (if_then_else (ne (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref:DI 26)
+            (pc))) "prework1.cpp":23:1 659 {*jcc}
+     (nil)
+ -> 26)
+(note 12 11 13 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(insn 13 12 14 4 (set (reg:DI 5 di)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7efe0e735900 __ioinit>)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(call_insn 14 13 15 4 (call (mem:QI (symbol_ref:DI ("_ZNSt8ios_base4InitC1Ev") [flags 0x41]  <function_decl 0x7efe0ee65a00 __ct_comp >) [0 __ct_comp  S1 A8])
+        (const_int 0 [0])) "/usr/include/c++/9/iostream":74:25 666 {*call}
+     (nil)
+    (expr_list:DI (use (reg:DI 5 di))
+        (nil)))
+(insn 15 14 16 4 (set (reg:DI 1 dx)
+        (symbol_ref:DI ("__dso_handle") [flags 0x42]  <var_decl 0x7efe0e637000 __dso_handle>)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(insn 16 15 17 4 (set (reg:DI 4 si)
+        (symbol_ref:DI ("_ZStL8__ioinit") [flags 0x2]  <var_decl 0x7efe0e735900 __ioinit>)) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(insn 17 16 18 4 (set (reg:DI 0 ax [82])
+        (mem/u/c:DI (const:DI (unspec:DI [
+                        (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7efe0ee65c00 __dt_comp >)
+                    ] UNSPEC_GOTPCREL)) [26  S8 A8])) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (nil))
+(insn 18 17 19 4 (set (reg:DI 5 di)
+        (reg:DI 0 ax [82])) "/usr/include/c++/9/iostream":74:25 66 {*movdi_internal}
+     (expr_list:REG_EQUAL (symbol_ref:DI ("_ZNSt8ios_base4InitD1Ev") [flags 0x41]  <function_decl 0x7efe0ee65c00 __dt_comp >)
+        (nil)))
+(call_insn 19 18 26 4 (set (reg:SI 0 ax)
+        (call (mem:QI (symbol_ref:DI ("__cxa_atexit") [flags 0x41]  <function_decl 0x7efe0e62ec00 __cxa_atexit>) [0 __cxa_atexit S1 A8])
+            (const_int 0 [0]))) "/usr/include/c++/9/iostream":74:25 677 {*call_value}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:DI (use (reg:DI 5 di))
+        (expr_list:DI (use (reg:DI 4 si))
+            (expr_list:DI (use (reg:DI 1 dx))
+                (nil)))))
+(code_label 26 19 24 5 8 (nil) [2 uses])
+(note 24 26 25 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 25 24 32 5 (const_int 0 [0]) "prework1.cpp":23:1 696 {nop}
+     (nil))
+(note 32 25 33 5 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 33 32 40 5 (parallel [
+            (set (reg/f:DI 7 sp)
+                (plus:DI (reg/f:DI 6 bp)
+                    (const_int 8 [0x8])))
+            (set (reg/f:DI 6 bp)
+                (mem:DI (reg/f:DI 6 bp) [0  S8 A8]))
+            (clobber (mem:BLK (scratch) [0  A8]))
+        ]) "prework1.cpp":23:1 706 {leave_rex64}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(note 40 33 34 5
+	.cfi_def_cfa 7, 8
+	 NOTE_INSN_CFI)
+(jump_insn 34 40 35 5 (simple_return) "prework1.cpp":23:1 690 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 35 34 27)
+(note 27 35 0 NOTE_INSN_DELETED)
+
+;; Function _GLOBAL__sub_I_main (_GLOBAL__sub_I_main, funcdef_no=2009, decl_uid=39981, cgraph_uid=923, symbol_order=1078)
+
+Creating trace 0 : start at note 1
+Creating trace 1 : start at note 13
+Creating trace 2 : start at note 14
+Processing trace 0 : start at note 1
+   saw edge from trace 0 to 1 (via fallthru 0)
+	push trace 1 to worklist
+Processing trace 1 : start at note 13
+   saw edge from trace 1 to 2 (via fallthru 0)
+	push trace 2 to worklist
+Processing trace 2 : start at note 14
+
+
+_GLOBAL__sub_I_main
+
+Dataflow summary:
+;;  invalidated by call 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 8 [st] 9 [st(1)] 10 [st(2)] 11 [st(3)] 12 [st(4)] 13 [st(5)] 14 [st(6)] 15 [st(7)] 17 [flags] 18 [fpsr] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 28 [mm0] 29 [mm1] 30 [mm2] 31 [mm3] 32 [mm4] 33 [mm5] 34 [mm6] 35 [mm7] 36 [r8] 37 [r9] 38 [r10] 39 [r11] 44 [xmm8] 45 [xmm9] 46 [xmm10] 47 [xmm11] 48 [xmm12] 49 [xmm13] 50 [xmm14] 51 [xmm15] 52 [] 53 [] 54 [] 55 [] 56 [] 57 [] 58 [] 59 [] 60 [] 61 [] 62 [] 63 [] 64 [] 65 [] 66 [] 67 [] 68 [] 69 [] 70 [] 71 [] 72 [] 73 [] 74 [] 75 []
+;;  hardware regs used 	 7 [sp]
+;;  regular block artificial uses 	 6 [bp] 7 [sp]
+;;  eh block artificial uses 	 6 [bp] 7 [sp] 16 [argp] 19 [frame]
+;;  entry block defs 	 0 [ax] 1 [dx] 2 [cx] 4 [si] 5 [di] 6 [bp] 7 [sp] 19 [frame] 20 [xmm0] 21 [xmm1] 22 [xmm2] 23 [xmm3] 24 [xmm4] 25 [xmm5] 26 [xmm6] 27 [xmm7] 36 [r8] 37 [r9]
+;;  exit block uses 	 6 [bp] 7 [sp] 19 [frame]
+;;  regs ever live 	 4 [si] 5 [di] 6 [bp] 7 [sp]
+;;  ref usage 	r0={2d} r1={2d} r2={2d} r4={3d,1u} r5={3d,1u} r6={3d,3u} r7={3d,6u} r8={1d} r9={1d} r10={1d} r11={1d} r12={1d} r13={1d} r14={1d} r15={1d} r17={1d} r18={1d} r19={1d,1u} r20={2d} r21={2d} r22={2d} r23={2d} r24={2d} r25={2d} r26={2d} r27={2d} r28={1d} r29={1d} r30={1d} r31={1d} r32={1d} r33={1d} r34={1d} r35={1d} r36={2d} r37={2d} r38={1d} r39={1d} r44={1d} r45={1d} r46={1d} r47={1d} r48={1d} r49={1d} r50={1d} r51={1d} r52={1d} r53={1d} r54={1d} r55={1d} r56={1d} r57={1d} r58={1d} r59={1d} r60={1d} r61={1d} r62={1d} r63={1d} r64={1d} r65={1d} r66={1d} r67={1d} r68={1d} r69={1d} r70={1d} r71={1d} r72={1d} r73={1d} r74={1d} r75={1d} 
+;;    total ref usage 103{91d,12u,0e} in 7{6 regular + 1 call} insns.
+(note 1 0 18 NOTE_INSN_DELETED)
+(insn 18 1 3 2 (unspec_volatile [
+            (const_int 0 [0])
+        ] UNSPECV_NOP_ENDBR) 1058 {nop_endbr}
+     (nil))
+(note 3 18 11 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 11 3 19 2 (set (mem:DI (pre_dec:DI (reg/f:DI 7 sp)) [0  S8 A8])
+        (reg/f:DI 6 bp)) "prework1.cpp":23:1 42 {*pushdi2_rex64}
+     (nil))
+(note 19 11 20 2
+	.cfi_def_cfa_offset 16
+	 NOTE_INSN_CFI)
+(note 20 19 12 2
+	.cfi_offset 6, -16
+	 NOTE_INSN_CFI)
+(insn/f 12 20 21 2 (set (reg/f:DI 6 bp)
+        (reg/f:DI 7 sp)) "prework1.cpp":23:1 66 {*movdi_internal}
+     (nil))
+(note 21 12 13 2
+	.cfi_def_cfa_register 6
+	 NOTE_INSN_CFI)
+(note 13 21 2 2 NOTE_INSN_PROLOGUE_END)
+(note 2 13 5 2 NOTE_INSN_FUNCTION_BEG)
+(insn 5 2 6 2 (set (reg:SI 4 si)
+        (const_int 65535 [0xffff])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(insn 6 5 7 2 (set (reg:SI 5 di)
+        (const_int 1 [0x1])) "prework1.cpp":23:1 67 {*movsi_internal}
+     (nil))
+(call_insn 7 6 14 2 (call (mem:QI (symbol_ref:DI ("_Z41__static_initialization_and_destruction_0ii") [flags 0x3]  <function_decl 0x7efe0e62ea00 __static_initialization_and_destruction_0>) [0 __static_initialization_and_destruction_0 S1 A8])
+        (const_int 0 [0])) "prework1.cpp":23:1 666 {*call}
+     (expr_list:REG_EH_REGION (const_int 0 [0])
+        (nil))
+    (expr_list:SI (use (reg:SI 5 di))
+        (expr_list:SI (use (reg:SI 4 si))
+            (nil))))
+(note 14 7 15 2 NOTE_INSN_EPILOGUE_BEG)
+(insn/f 15 14 22 2 (set (reg/f:DI 6 bp)
+        (mem:DI (post_inc:DI (reg/f:DI 7 sp)) [0  S8 A8])) "prework1.cpp":23:1 52 {*popdi1}
+     (expr_list:REG_CFA_DEF_CFA (plus:DI (reg/f:DI 7 sp)
+            (const_int 8 [0x8]))
+        (nil)))
+(note 22 15 16 2
+	.cfi_def_cfa 7, 8
+	 NOTE_INSN_CFI)
+(jump_insn 16 22 17 2 (simple_return) "prework1.cpp":23:1 690 {simple_return_internal}
+     (nil)
+ -> simple_return)
+(barrier 17 16 10)
+(note 10 17 0 NOTE_INSN_DELETED)
