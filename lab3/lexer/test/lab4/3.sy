@@ -1,0 +1,72 @@
+int a;
+float f;
+
+void f(){
+    int B_abc123_A;
+}
+
+int main()
+{
+    int a;
+
+    int hex1 = 0x0039acdef;
+    int hex2 = 0Xa1c2d3e00;
+
+    float _addDAD_98ddsax;
+    float RaddDAD_98ddsax;
+
+    int octal = 01234567;
+
+    float f = 3.14156;
+    f = 0.314;
+    f = 3.00;
+
+    // comment line
+
+    /* aaaaaaa
+    bbbbbbb
+    ccccccc
+    */
+
+    int arr[10];
+
+    a = a * 1;
+    a = a / 1;
+    a = a % 1;
+    a = 1 + 2;
+
+    if (a < 2){
+        break;
+    }
+    else if (a <= 2){
+
+    }
+    else if (a == 2){
+
+    }
+    else if (a != 2){
+
+    }
+    else if (a >= 2){
+
+    }
+    else if (a > 2){
+
+    }
+    
+    while ((a == 1 || a == 2) && a != 3 && !0){
+        continue;
+    }
+
+    {
+        int h;
+        {
+            int h;
+            {
+                int h;
+            }
+        }
+    }
+
+    return 0;
+}
