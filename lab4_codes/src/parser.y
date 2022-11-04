@@ -31,8 +31,8 @@
 %token RETURN CONTINUE BREAK
 %token CONST
 
-%nterm <stmttype> Stmts Stmt AssignStmt ExprStmt BlockStmt IfStmt WhileStmt BreakStmt ContinueStmt ReturnStmt DeclStmt FuncDef ConstDeclStmt ConstDef ConstDefList VarDeclStmt VarDef VarDefList FuncFParam
-%nterm <exprtype> Exp AddExp Cond LOrExp PrimaryExp LVal RelExp LAndExp EqExp MulExp UnaryExp ConstInitVal ConstInitValList InitVal InitValList ArrayIndex FuncRParams
+%nterm <stmttype> Stmts Stmt AssignStmt ExprStmt BlockStmt IfStmt WhileStmt BreakStmt ContinueStmt ReturnStmt DeclStmt FuncDef ConstDeclStmt ConstDef ConstDefList VarDeclStmt VarDef VarDefList 
+%nterm <exprtype> Exp AddExp Cond LOrExp PrimaryExp LVal RelExp LAndExp EqExp MulExp UnaryExp ConstInitVal InitVal FuncRParams
 %nterm <type> Type
 
 %precedence THEN
@@ -51,8 +51,8 @@ Stmts
     ;
 Stmt
     : AssignStmt {$$=$1;}
-    | BlockStmt {$$=$1;}
     | ExprStmt {$$=$1;}
+    | BlockStmt {$$=$1;}
     | IfStmt {$$=$1;}
     | WhileStmt {$$=$1;}
     | BreakStmt {$$=$1;}
@@ -74,24 +74,31 @@ LVal
         $$ = new Id(se);
         delete []$1;
     }
-    | ID ArrayIndex {
-        SymbolEntry *se;
-        se = identifiers->lookup($1);
-        if(se == nullptr)
-        {
-            fprintf(stderr, "identifier \"%s\" is undefined\n", (char*)$1);
-            delete [](char*)$1;
-            assert(se != nullptr);
-        }
-        $$ = new IdArrayIndex(se, $2);// TODO
-        delete []$1;    
-    }
+    // | ID ArrayIndex {
+    //     SymbolEntry *se;
+    //     se = identifiers->lookup($1);
+    //     if(se == nullptr)
+    //     {
+    //         fprintf(stderr, "identifier \"%s\" is undefined\n", (char*)$1);
+    //         delete [](char*)$1;
+    //         assert(se != nullptr);
+    //     }
+    //     $$ = new IdArrayIndex(se, $2);// TODO
+    //     delete []$1;    
+    // }
     ;
 AssignStmt
     :
     LVal ASSIGN Exp SEMICOLON {
         $$ = new AssignStmt($1, $3);
     }
+    ;
+ExprStmt
+    : Exp SEMICOLON {
+        $$ = new ExprStmt($1);
+    }
+    |
+    SEMICOLON {}
     ;
 BlockStmt
     :   LBRACE 
@@ -103,11 +110,6 @@ BlockStmt
             identifiers = identifiers->getPrev();
             delete top;
         }
-    ;
-ExprStmt
-    : Exp SEMICOLON {
-        $$ = new ExprStmt($1);
-    }
     ;
 IfStmt
     : IF LPAREN Cond RPAREN Stmt %prec THEN {
@@ -148,6 +150,10 @@ Cond
     ;
 PrimaryExp
     :
+    LPAREN Exp RPAREN {
+        $$ = $2;
+    }
+    | 
     LVal {
         $$ = $1;
     }
@@ -155,10 +161,6 @@ PrimaryExp
     INTEGER {
         SymbolEntry *se = new ConstantSymbolEntry(TypeSystem::intType, $1);
         $$ = new Constant(se);
-    }
-    | 
-    LPAREN Exp RPAREN {
-        $$ = $2;
     }
     ;
 UnaryExp
@@ -174,7 +176,7 @@ UnaryExp
             delete [](char*)$1;
             assert(se != nullptr);
         }
-        $$ = FunctionCallExpr(se, $3)
+        $$ = new FunctionCallExpr(se, $3);
     }
     | 
     ID LPAREN RPAREN {
@@ -186,12 +188,10 @@ UnaryExp
             delete [](char*)$1;
             assert(se != nullptr);
         }
-        $$ = FunctionCallExpr(se)
+        $$ = new FunctionCallExpr(se);
     }
     | 
-    ADD UnaryExp {
-        $$ = $2;
-    }
+    ADD UnaryExp {$$ = $2;}
     | 
     SUB UnaryExp {
         $$ = new UnaryExpr(nullptr, UnaryExpr::SUB, $2);
@@ -199,22 +199,6 @@ UnaryExp
     | 
     NOT UnaryExp {
         $$ = new UnaryExpr(nullptr, UnaryExpr::NOT, $2);
-    }
-    ;
-AddExp
-    :
-    PrimaryExp {$$ = $1;}
-    |
-    AddExp ADD PrimaryExp
-    {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
-        $$ = new BinaryExpr(se, BinaryExpr::ADD, $1, $3);
-    }
-    |
-    AddExp SUB PrimaryExp
-    {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
-        $$ = new BinaryExpr(se, BinaryExpr::SUB, $1, $3);
     }
     ;
 MulExp
@@ -236,30 +220,26 @@ MulExp
         $$ = new BinaryExpr(se, BinaryExpr::MOD, $1, $3);
     }
     ;
-EqExp
+AddExp
     :
-    RelExp {$$ = $1}
+    MulExp {$$ = $1;}
     |
-    EqExp EQUAL RelExp {
-        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
-        $$ = new BinaryExpr(se, BinaryExpr::EQUAL, $1, $3);
+    AddExp ADD MulExp
+    {
+        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        $$ = new BinaryExpr(se, BinaryExpr::ADD, $1, $3);
     }
     |
-    EqExp NOTEQUAL RelExp {
-        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
-        $$ = new BinaryExpr(se, BinaryExpr::NOTEQUAL, $1, $3);
+    AddExp SUB MulExp
+    {
+        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        $$ = new BinaryExpr(se, BinaryExpr::SUB, $1, $3);
     }
     ;
 RelExp
     :
     AddExp {$$ = $1;}
     |
-    RelExp LESS AddExp
-    {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
-        $$ = new BinaryExpr(se, BinaryExpr::LESS, $1, $3);
-    }
-    | 
     RelExp LESS AddExp
     {
         SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
@@ -284,11 +264,25 @@ RelExp
         $$ = new BinaryExpr(se, BinaryExpr::GEQU, $1, $3);
     }
     ;
-LAndExp
+EqExp
     :
     RelExp {$$ = $1;}
     |
-    LAndExp AND RelExp
+    EqExp EQUAL RelExp {
+        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        $$ = new BinaryExpr(se, BinaryExpr::EQUAL, $1, $3);
+    }
+    |
+    EqExp NOTEQUAL RelExp {
+        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        $$ = new BinaryExpr(se, BinaryExpr::NOTEQUAL, $1, $3);
+    }
+    ;
+LAndExp
+    :
+    EqExp {$$ = $1;}
+    |
+    LAndExp AND EqExp
     {
         SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::AND, $1, $3);
@@ -310,8 +304,12 @@ FuncRParams
     | 
     FuncRParams COMMA Exp {
         $$ = $1;
-        $1->getRightestBro()->brother = $3; // TODO
+        Node *tmp;
+        tmp = tmp;
+        tmp = $1->getRightestBro()->brother();
+        tmp = $3; // TODO
     }
+    ;
 Type
     : INT {
         $$ = TypeSystem::intType;
@@ -325,9 +323,10 @@ Type
     ;
 DeclStmt
     :
-    ConstDeclStmt { $$ = $1;}
-    |
     VarDeclStmt {$$ = $1;}
+    |
+    ConstDeclStmt { $$ = $1;}
+   
     /* Type ID SEMICOLON {
         SymbolEntry *se;
         se = new IdentifierSymbolEntry($1, $2, identifiers->getLevel());
@@ -336,26 +335,134 @@ DeclStmt
         delete []$2;
     } */
     ;
+VarDeclStmt
+    : 
+    Type VarDefList SEMICOLON {$$ = $2;}
+    ;
 ConstDeclStmt
     :
     CONST Type ConstDefList SEMICOLON {
         $$ = $3;
     }
     ;
+VarDefList
+    : 
+    VarDefList COMMA VarDef {
+        $$ = $1;
+        Node *tmp;
+        tmp = tmp;
+        tmp = $1->getRightestBro()->brother();
+        tmp = $3;
+    } 
+    | 
+    VarDef {$$ = $1;}
+    ;
 ConstDefList
     :
-    ConstDef {$$ = $1;}
-    |
     ConstDefList COMMA ConstDef {
-        $$ = $1
-        $1->getRightestBro()->brother = $3; // TODO
+        $$ = $1;
+        Node *tmp;
+        tmp = tmp;
+        tmp = ($1->getRightestBro()->brother());
+        tmp = $3; // TODO
     }
+    |
+    ConstDef {$$ = $1;}
+    ;
+VarDef
+    :
+    ID {
+        SymbolEntry* se;
+        se = new IdentifierSymbolEntry(TypeSystem::intType, $1, identifiers->getLevel());
+        identifiers->install($1, se);
+        $$ = new DeclStmt(new Id(se));
+        delete []$1;
+    }
+    // |
+    // ID ArrayIndex {
+
+    // }
+    |
+    ID ASSIGN InitVal {
+        SymbolEntry* se;
+        se = new IdentifierSymbolEntry(TypeSystem::intType, $1, identifiers->getLevel());
+        identifiers->install($1, se);
+        ((IdentifierSymbolEntry*)se)->setValue($3->intValue());
+        $$ = new DeclStmt(new Id(se), $3);
+        delete []$1;
+    }
+    // |
+    // ID ArrayIndex ASSIGN {
+
+    // }
+    // InitVal {
+
+    // }
     ;
 // TODO:
 ConstDef
     :
+    ID ASSIGN ConstInitVal {
+        SymbolEntry* se;
+        se = new IdentifierSymbolEntry(TypeSystem::constIntType, $1, identifiers->getLevel());
+        identifiers->install($1, se);
+        ((IdentifierSymbolEntry*)se)->setValue($3->intValue());
+        $$ = new DeclStmt(new Id(se), $3);
+        delete []$1; 
+    }
+    // |
+    // ID ArrayIndex ASSIGN {
 
+    // } 
+    // ConstInitVal {
+
+    // }TODO:
     ;
+ConstInitVal
+    :
+    Exp {
+        $$ = $1;
+    }
+     // |
+     // LBRACE RBRACE {
+     // }
+     // | 
+     // LBRACE {
+     // }
+     //     ConstInitValList RBRACE {
+     // }
+     ;
+InitVal
+    : Exp {$$ = $1;} 
+    ;//TODO: array init
+/* InitValList
+    : InitVal {$$ = $1;}
+    | InitValList COMMA InitVal {
+         $$ = $1;
+         $1->getRightestBro()->brother = $3;
+    }
+    ; */
+/* ConstInitValList
+    :
+    ConstInitVal {
+        $$ = $1;
+    }
+    |
+    ConstInitValList COMMA ConstInitVal {
+         $$ = $1;
+         $1->getRightestBro()->brother = $3;
+    } 
+    ; */
+// ArrayIndex
+//     :
+//     LBRACKET Exp RBRACKET {
+//         $$ = $2;
+//     }
+//     | ArrayIndex LBRACKET ConstExp RBRACKET {
+//         $$ = $1;
+//         $1->getRightestBro()->brother = $3;
+//     }
+//     ;
 FuncDef
     :
     Type ID {

@@ -225,6 +225,175 @@ COMMENTEND "*/"
     return RBRACKET;
 }
 
+"getint" {
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    Type *func = new FunctionType(TypeSystem::intType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;
+}
+
+"getch" {
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    Type *func = new FunctionType(TypeSystem::intType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;
+}
+
+"getfloat" {
+    // TODO:
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    Type *func = new FunctionType(TypeSystem::floatType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;
+}
+
+"putint" {
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    vec.push_back(TypeSystem::intType);
+    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;
+}
+
+"putch" {
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    vec.push_back(TypeSystem::intType);
+    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;
+}
+
+"putfloat" {
+    // TODO:
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    vec.push_back(TypeSystem::floatType);
+    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;
+}
+
+"putf" {
+    // TODO:
+}
+
+"starttime" {
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;    
+}
+
+"stoptime" {
+    if(dump_tokens)
+        DEBUG_FOR_LAB4(yytext);
+    char *lexeme;
+    lexeme = new char[strlen(yytext) + 1];
+    strcpy(lexeme, yytext);
+    yylval.strtype = lexeme;
+    // create FunctionType
+    std::vector<Type*> vec;
+    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    // create SymbolEntry
+    SymbolTable *symt = identifiers;
+    while(symt->getPrev()){
+        symt = symt->getPrev();
+    }
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel()); 
+    symt->install(yytext, se);
+    return ID;   
+}
+
 {DECIMIAL} {
     if(dump_tokens)
         DEBUG_FOR_LAB4(yytext);
@@ -248,7 +417,7 @@ COMMENTEND "*/"
     return INTEGER;
 }
 {FLOATDEC} { //TODO: 先写十进制浮点数
-    int float_dec;
+    float float_dec;
     sscanf(yytext, "%f", &float_dec);
     if(dump_tokens)
         DEBUG_FOR_LAB4(yytext);

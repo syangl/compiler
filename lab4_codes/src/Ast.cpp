@@ -9,14 +9,83 @@ int Node::counter = 0;
 Node::Node()
 {
     seq = counter++;
+    bro = nullptr;
 }
 
 Node* Node::getRightestBro(){
     Node* node = this;
-    while(node->brother){
-        node = node->brother;
+    while(node->brother()){
+        node = node->brother();
     }
     return node;
+}
+
+int BinaryExpr::intValue() {
+    int value = 0;
+    switch (op) {
+        case ADD:
+            value = expr1->intValue() + expr2->intValue();
+            break;
+        case SUB:
+            value = expr1->intValue() - expr2->intValue();
+            break;
+        case MUL:
+            value = expr1->intValue() * expr2->intValue();
+            break;
+        case DIV:
+            value = expr1->intValue() / expr2->intValue();
+            break;
+        case MOD:
+            value = expr1->intValue() % expr2->intValue();
+            break;
+        case AND:
+            value = expr1->intValue() && expr2->intValue();
+            break;
+        case OR:
+            value = expr1->intValue() || expr2->intValue();
+            break;
+        case LESS:
+            value = expr1->intValue() < expr2->intValue();
+            break;
+        case LEQU:
+            value = expr1->intValue() <= expr2->intValue();
+            break;
+        case GREAT:
+            value = expr1->intValue() > expr2->intValue();
+            break;
+        case GEQU:
+            value = expr1->intValue() >= expr2->intValue();
+            break;
+        case EQUAL:
+            value = expr1->intValue() == expr2->intValue();
+            break;
+        case NOTEQUAL:
+            value = expr1->intValue() != expr2->intValue();
+            break;
+        default:
+            value = 0;
+    }
+    return value;
+}
+int UnaryExpr::intValue() {
+        int value = 0;
+    switch (op) {
+        case SUB:
+            value = -(expr->intValue());
+            break;
+        case NOT:
+            value = !(expr->intValue());
+            break;
+        default:
+            value = 0;
+    }
+    return value;
+}
+int Constant::intValue() {
+    return ((ConstantSymbolEntry*)symbolEntry)->getValue();
+}
+int Id::intValue() {
+    return ((IdentifierSymbolEntry*)symbolEntry)->getValue();
 }
 
 void Ast::output()
@@ -92,8 +161,20 @@ void UnaryExpr::output(int level)
 }
 
 // TODO: FunctionCall
-
-// TODO: InitExpr
+void FunctionCallExpr::output(int level) {
+    std::string name, type;
+    int scope;
+    name = symbolEntry->toStr();
+    type = symbolEntry->getType()->toStr();
+    scope = dynamic_cast<IdentifierSymbolEntry*>(symbolEntry)->getScope();
+    fprintf(yyout, "%*cCallee\tfunction name: %s\ttype: %s\tscope:  %d\n",
+            level, ' ', name.c_str(), type.c_str(), scope);
+    Node* tmp = param;
+    while (tmp) {
+        tmp->output(level + 4);
+        tmp = tmp->brother();
+    }
+}
 
 void Constant::output(int level)
 {
@@ -115,24 +196,17 @@ void Id::output(int level)
             name.c_str(), scope, type.c_str());
 }
 
-void IdArrayIndex::output(int level)
-{
-    std::string name, type;
-    int scope;
-    name = symbolEntry->toStr();
-    type = symbolEntry->getType()->toStr();
-    scope = dynamic_cast<IdentifierSymbolEntry*>(symbolEntry)->getScope();
-    fprintf(yyout, "%*cId\tname: %s\tscope: %d\ttype: %s\n", level, ' ',
-            name.c_str(), scope, type.c_str());
-    // TODO:
-    // ExprNode* tmp = Idx;
-    // int i = 0;
-    // while (tmp) {
-    //     tmp->output(level + 4 + 4 * i);
-    //     ++i;
-    //     tmp = (ExprNode*)(tmp->getNext());
-    // }
-}
+// void IdArrayIndex::output(int level)
+// {
+//     std::string name, type;
+//     int scope;
+//     name = symbolEntry->toStr();
+//     type = symbolEntry->getType()->toStr();
+//     scope = dynamic_cast<IdentifierSymbolEntry*>(symbolEntry)->getScope();
+//     fprintf(yyout, "%*cId\tname: %s\tscope: %d\ttype: %s\n", level, ' ',
+//             name.c_str(), scope, type.c_str());
+//     // TODO:
+// }
 
 void CompoundStmt::output(int level)
 {
@@ -151,6 +225,8 @@ void DeclStmt::output(int level)
 {
     fprintf(yyout, "%*cDeclStmt\n", level, ' ');
     id->output(level + 4);
+    if (expr) expr->output(level + 4);
+    if (this->brother()) this->brother()->output(level);
 }
 
 void IfStmt::output(int level)
@@ -197,6 +273,13 @@ void AssignStmt::output(int level)
     lval->output(level + 4);
     expr->output(level + 4);
 }
+
+void ExprStmt::output(int level)
+{
+    fprintf(yyout, "%*cAssignStmt\n", level, ' ');
+    expr->output(level + 4);
+}
+
 
 void FunctionDef::output(int level)
 {

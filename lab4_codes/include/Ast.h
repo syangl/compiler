@@ -10,14 +10,14 @@ class Node
 {
 private:
     static int counter;
-    int seq;
-protected:   
-    Node *brother;
+    int seq;  
+    Node *bro;
 public:
-    Node() : brother(nullptr){};
+    Node();
     int getSeq() const {return seq;};
     virtual void output(int level) = 0;
-    Node* getRightestBro();
+    Node *getRightestBro();
+    Node *brother(){return bro;};
 };
 
 // ExprNode
@@ -27,6 +27,7 @@ protected:
     SymbolEntry *symbolEntry;
 public:
     ExprNode(SymbolEntry *symbolEntry) : symbolEntry(symbolEntry){};
+    virtual int intValue(){return 0;};
 };
 
 // BinaryNode
@@ -39,6 +40,7 @@ public:
     enum {ADD, SUB, MUL, DIV, MOD, AND, OR, LESS, LEQU, EQUAL, NOTEQUAL, GREAT, GEQU};
     BinaryExpr(SymbolEntry *se, int op, ExprNode*expr1, ExprNode*expr2) : ExprNode(se), op(op), expr1(expr1), expr2(expr2){};
     void output(int level);
+    int intValue();
 };
 
 // UnaryNode
@@ -51,6 +53,7 @@ public:
     enum { NOT, SUB };
     UnaryExpr(SymbolEntry* se, int op, ExprNode* expr) : ExprNode(se), op(op), expr(expr){};
     void output(int level);
+    int intValue();
 };
 
 // FunctionCallExprNode
@@ -63,15 +66,14 @@ public:
     void output(int level);
 };
 
-// InitExpr
-// TODO:
-
 // ConstantNode
 class Constant : public ExprNode
 {
 public:
     Constant(SymbolEntry *se) : ExprNode(se){};
     void output(int level);
+    int intValue();
+    // TODO: floatValue()
 };
 
 // IdNode
@@ -80,6 +82,7 @@ class Id : public ExprNode
 public:
     Id(SymbolEntry *se) : ExprNode(se){};
     void output(int level);
+    int intValue();
 };
 // IdArrayIndex
 class IdArrayIndex : public ExprNode
@@ -89,12 +92,12 @@ private:
 public:
     IdArrayIndex(SymbolEntry *se, ExprNode* Idx) : ExprNode(se), Idx(Idx){};
     void output(int level);
+    int intValue();
 };
 
 // StmtNode
 class StmtNode : public Node
 {};
-
 // CompoundStmtNode
 class CompoundStmt : public StmtNode
 {
@@ -120,8 +123,9 @@ class DeclStmt : public StmtNode
 {
 private:
     Id *id;
+    ExprNode* expr = nullptr;
 public:
-    DeclStmt(Id *id) : id(id){};
+    DeclStmt(Id *id, ExprNode* expr = nullptr) : id(id), expr(expr){};
     void output(int level);
 };
 
@@ -193,6 +197,16 @@ private:
     ExprNode *expr;
 public:
     AssignStmt(ExprNode *lval, ExprNode *expr) : lval(lval), expr(expr) {};
+    void output(int level);
+};
+
+// ExprStmt
+class ExprStmt : public StmtNode
+{
+private:
+    ExprNode *expr;
+public:
+    ExprStmt(ExprNode *expr) : expr(expr) {};
     void output(int level);
 };
 
