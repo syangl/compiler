@@ -129,6 +129,14 @@ public:
     void output(int level);
 };
 
+// EmptyStmtNode
+class EmptyStmt : public StmtNode
+{
+public:
+    EmptyStmt(){};
+    void output(int level);
+};
+
 // IfStmtNode
 class IfStmt : public StmtNode
 {

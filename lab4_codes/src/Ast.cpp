@@ -280,6 +280,11 @@ void ExprStmt::output(int level)
     expr->output(level + 4);
 }
 
+void EmptyStmt::output(int level)
+{
+    fprintf(yyout, "%*cEmptyStmt\n", level, ' ');
+}
+
 
 void FunctionDef::output(int level)
 {

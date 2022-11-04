@@ -98,7 +98,9 @@ ExprStmt
         $$ = new ExprStmt($1);
     }
     |
-    SEMICOLON {}
+    SEMICOLON {
+        $$ = new EmptyStmt();
+    }
     ;
 BlockStmt
     :   LBRACE 
