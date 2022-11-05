@@ -28,6 +28,7 @@ protected:
 public:
     ExprNode(SymbolEntry *symbolEntry) : symbolEntry(symbolEntry){};
     virtual int intValue(){return 0;};
+    SymbolEntry *getSymbolEntry() const {return symbolEntry;};
 };
 
 // BinaryNode
@@ -127,6 +128,7 @@ private:
 public:
     DeclStmt(Id *id, ExprNode* expr = nullptr) : id(id), expr(expr){};
     void output(int level);
+    Id *getId() const {return id;};
 };
 
 // EmptyStmtNode
@@ -224,8 +226,9 @@ class FunctionDef : public StmtNode
 private:
     SymbolEntry *se;
     StmtNode *stmt;
+    DeclStmt *decl;
 public:
-    FunctionDef(SymbolEntry *se, StmtNode *stmt) : se(se), stmt(stmt){};
+    FunctionDef(SymbolEntry *se,  StmtNode *stmt, DeclStmt *decl = nullptr) : se(se), stmt(stmt), decl(decl){};
     void output(int level);
 };
 

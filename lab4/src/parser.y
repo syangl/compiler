@@ -31,7 +31,7 @@
 %token RETURN CONTINUE BREAK
 %token CONST
 
-%nterm <stmttype> Stmts Stmt AssignStmt ExprStmt BlockStmt IfStmt WhileStmt BreakStmt ContinueStmt ReturnStmt DeclStmt FuncDef ConstDeclStmt ConstDef ConstDefList VarDeclStmt VarDef VarDefList 
+%nterm <stmttype> Stmts Stmt AssignStmt ExprStmt BlockStmt IfStmt WhileStmt BreakStmt ContinueStmt ReturnStmt DeclStmt FuncDef ConstDeclStmt ConstDef ConstDefList VarDeclStmt VarDef VarDefList FuncFParam FuncFParams EmptyStmt
 %nterm <exprtype> Exp AddExp Cond LOrExp PrimaryExp LVal RelExp LAndExp EqExp MulExp UnaryExp ConstInitVal InitVal FuncRParams
 %nterm <type> Type
 
@@ -60,6 +60,7 @@ Stmt
     | ReturnStmt {$$=$1;}
     | DeclStmt {$$=$1;}
     | FuncDef {$$=$1;}
+    | EmptyStmt {$$=$1;}
     ;
 LVal
     : ID {
@@ -74,6 +75,7 @@ LVal
         $$ = new Id(se);
         delete []$1;
     }
+    ;
     // | ID ArrayIndex {
     //     SymbolEntry *se;
     //     se = identifiers->lookup($1);
@@ -86,7 +88,6 @@ LVal
     //     $$ = new IdArrayIndex(se, $2);// TODO
     //     delete []$1;    
     // }
-    ;
 AssignStmt
     :
     LVal ASSIGN Exp SEMICOLON {
@@ -96,10 +97,6 @@ AssignStmt
 ExprStmt
     : Exp SEMICOLON {
         $$ = new ExprStmt($1);
-    }
-    |
-    SEMICOLON {
-        $$ = new EmptyStmt();
     }
     ;
 BlockStmt
@@ -112,6 +109,18 @@ BlockStmt
             identifiers = identifiers->getPrev();
             delete top;
         }
+    ;
+EmptyStmt
+    :
+    SEMICOLON {
+        // 空语句情况1，只有;
+        $$ = new EmptyStmt();
+    }
+    |
+    LBRACE RBRACE {
+        // 空语句情况2，{}，代替BlockStmt
+        $$ = new EmptyStmt();
+    }
     ;
 IfStmt
     : IF LPAREN Cond RPAREN Stmt %prec THEN {
@@ -156,9 +165,7 @@ PrimaryExp
         $$ = $2;
     }
     | 
-    LVal {
-        $$ = $1;
-    }
+    LVal {$$ = $1;}
     | 
     INTEGER {
         SymbolEntry *se = new ConstantSymbolEntry(TypeSystem::intType, $1);
@@ -309,7 +316,7 @@ FuncRParams
         Node *tmp;
         tmp = tmp;
         tmp = $1->getRightestBro()->brother();
-        tmp = $3; // TODO
+        tmp = $3; 
     }
     ;
 Type
@@ -466,8 +473,8 @@ InitVal
 //     }
 //     ;
 FuncDef
-    :
-    Type ID {
+    : // 两个Type ID有冲突，只能合并了
+    /* Type ID {
         Type *funcType;
         funcType = new FunctionType($1,{});
         SymbolEntry *se = new IdentifierSymbolEntry(funcType, $2, identifiers->getLevel());
@@ -484,6 +491,57 @@ FuncDef
         SymbolTable *top = identifiers;
         identifiers = identifiers->getPrev();
         delete top;
+        delete []$2;
+    }
+    | */
+    Type ID {
+        identifiers = new SymbolTable(identifiers);
+    }
+    LPAREN FuncFParams RPAREN {
+        Type *funcType;
+        std::vector<Type*> vec;
+        DeclStmt* fparam = (DeclStmt*)$5;
+        while (fparam) {
+            vec.push_back(fparam->getId()->getSymbolEntry()->getType());
+            fparam = (DeclStmt*)(fparam->brother());
+        }
+        funcType = new FunctionType($1, vec);
+        SymbolEntry *se = new IdentifierSymbolEntry(funcType, $2, identifiers->getPrev()->getLevel());
+        identifiers->getPrev()->install($2, se);
+    }
+    BlockStmt
+    {
+        SymbolEntry *se;
+        se = identifiers->lookup($2);
+        assert(se != nullptr);
+        $$ = new FunctionDef(se, $8, (DeclStmt*)$5);
+        SymbolTable *top = identifiers;
+        identifiers = identifiers->getPrev();
+        delete top;
+        delete []$2;
+    }
+    ;
+FuncFParams
+    :
+    %empty {$$=nullptr;} //empty的说明：https://www.gnu.org/software/bison/manual/html_node/Empty-Rules.html#:~:text=The%20%25empty%20directive%20allows%20to%20make%20explicit%20that,Bison%20extension%2C%20it%20does%20not%20work%20with%20Yacc.
+    |
+    FuncFParam {$$ = $1;}
+    |
+    FuncFParams COMMA FuncFParam {
+        $$ = $1;
+        Node *tmp;
+        tmp = tmp;
+        tmp = ($1->getRightestBro()->brother());
+        tmp = $3;
+    }
+    ;
+FuncFParam
+    :
+    Type ID {
+        SymbolEntry* se;
+        se = new IdentifierSymbolEntry($1, $2, identifiers->getLevel());
+        identifiers->install($2, se);
+        $$ = new DeclStmt(new Id(se));
         delete []$2;
     }
     ;
