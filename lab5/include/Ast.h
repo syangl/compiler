@@ -234,6 +234,8 @@ public:
     void output(int level);
     bool typeCheck(Type* retType = nullptr);
     void genCode();
+    BasicBlock* getCondBb() {return this->condBb;};
+    BasicBlock* getEndBb() {return this->endBb;};
 };
 
 // BreakStmtNode

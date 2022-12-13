@@ -87,6 +87,15 @@ void BinaryInstruction::output() const
     case SUB:
         op = "sub";
         break;
+    case MUL:
+        op = "mul";
+        break;
+    case DIV:
+        op = "sdiv";
+        break;
+    case MOD:
+        op = "srem";
+        break;
     default:
         break;
     }
@@ -310,4 +319,65 @@ void StoreInstruction::output() const
     std::string src_type = operands[1]->getType()->toStr();
 
     fprintf(yyout, "  store %s %s, %s %s, align 4\n", src_type.c_str(), src.c_str(), dst_type.c_str(), dst.c_str());
+}
+
+FuncCallInstruction::FuncCallInstruction(Operand *dst, SymbolEntry *func, std::vector<Operand *> params, BasicBlock *insert_bb): Instruction(FUNCCALL, insert_bb), func(func)
+{
+    operands.push_back(dst);
+    if (dst != nullptr){
+        dst->setDef(this);
+    }
+    for (auto param = params.begin(); param != params.end(); ++param){
+        operands.push_back((*param));
+        (*param)->addUse(this);
+    }
+}
+
+void FuncCallInstruction::output() const
+{
+    fprintf(yyout, "  ");
+    if (operands[0]){
+        fprintf(yyout, "%s = ", operands[0]->toStr().c_str());
+    }
+    FunctionType* type = (FunctionType*)(func->getType());
+    fprintf(yyout, "call %s %s(", type->getRetType()->toStr().c_str(), func->toStr().c_str());
+    for (long unsigned int i = 1; i < operands.size(); i++) {
+        if (i != 1){
+            fprintf(yyout, ", ");
+        }
+        fprintf(yyout, "%s %s", operands[i]->getType()->toStr().c_str(), operands[i]->toStr().c_str());
+    }
+    fprintf(yyout, ")\n");
+}
+
+ZeroExtensionInstruction::ZeroExtensionInstruction(Operand* dst, Operand* src, BasicBlock* insert_bb): Instruction(ZEROEXT, insert_bb) {
+    operands.push_back(dst);
+    operands.push_back(src);
+    dst->setDef(this);
+    src->addUse(this);
+}
+
+void ZeroExtensionInstruction::output() const
+{
+    Operand* dst = operands[0];
+    Operand* src = operands[1];
+    fprintf(yyout, "  %s = zext %s %s to i32\n", dst->toStr().c_str(), src->getType()->toStr().c_str(), src->toStr().c_str());
+}
+
+XorInstruction::XorInstruction(Operand *dst,  Operand *src1, BasicBlock *insert_bb): Instruction(XOR, insert_bb)
+{
+    operands.push_back(dst);
+    operands.push_back(src1);
+    //operands.push_back(src2); //改的有点多，先不需要src2了，取反直接output true
+    dst->setDef(this);
+    src1->addUse(this);
+    //src2->addUse(this);
+}
+
+void XorInstruction::output() const
+{
+    Operand* dst = operands[0];
+    Operand* src1 = operands[1];
+    // Operand* src2 = operands[2];
+    fprintf(yyout, "  %s = xor %s %s, true\n", dst->toStr().c_str(), src1->getType()->toStr().c_str(), src1->toStr().c_str()/*, src2->toStr().c_str()*/);
 }

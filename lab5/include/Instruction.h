@@ -15,6 +15,7 @@ public:
     BasicBlock *getParent();
     bool isUncond() const {return instType == UNCOND;};
     bool isCond() const {return instType == COND;};
+    bool isRet() const {return instType == RET;};
     void setParent(BasicBlock *);
     void setNext(Instruction *);
     void setPrev(Instruction *);
@@ -28,7 +29,7 @@ protected:
     Instruction *next;
     BasicBlock *parent;
     std::vector<Operand*> operands;
-    enum {BINARY, COND, UNCOND, RET, LOAD, STORE, CMP, ALLOCA};
+    enum {BINARY, COND, UNCOND, RET, LOAD, STORE, CMP, ALLOCA, FUNCCALL, ZEROEXT, XOR };
 };
 
 // meaningless instruction, used as the head node of the instruction list.
@@ -71,7 +72,7 @@ public:
     BinaryInstruction(unsigned opcode, Operand *dst, Operand *src1, Operand *src2, BasicBlock *insert_bb = nullptr);
     ~BinaryInstruction();
     void output() const;
-    enum {SUB, ADD, AND, OR};
+    enum {SUB, ADD, AND, OR, MUL, DIV, MOD};
 };
 
 class CmpInstruction : public Instruction
@@ -116,6 +117,29 @@ class RetInstruction : public Instruction
 public:
     RetInstruction(Operand *src, BasicBlock *insert_bb = nullptr);
     ~RetInstruction();
+    void output() const;
+};
+
+class FuncCallInstruction : public Instruction 
+{
+private:
+    SymbolEntry* func;
+public:
+    FuncCallInstruction(Operand *dst, SymbolEntry *func, std::vector<Operand *> params, BasicBlock *insert_bb = nullptr);
+    void output() const;
+};
+
+class ZeroExtensionInstruction : public Instruction 
+{
+public:
+    ZeroExtensionInstruction(Operand* dst, Operand* src, BasicBlock* insert_bb = nullptr);
+    void output() const;
+};
+
+class XorInstruction : public Instruction 
+{
+public:
+    XorInstruction(Operand* dst,  Operand *src1, /*Operand *src1,*/BasicBlock* insert_bb = nullptr);
     void output() const;
 };
 
