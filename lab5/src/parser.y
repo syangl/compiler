@@ -8,7 +8,7 @@
     int yyerror( char const * );
     // break continue
     int count = 0;
-    stack<WhileStmt*> whileStack;
+    std::stack<StmtNode*> whileStack;
 }
 
 %code requires {
@@ -138,13 +138,13 @@ WhileStmt
         //进入while要count+1
         ++count;
         WhileStmt *whileStmt = new WhileStmt($3);
-        $<while>$ = whileStmt;
-        WhileStmt.push(whileStmt);
+        $<stmttype>$ = whileStmt;
+        whileStack.push(whileStmt);
     }
     Stmt {
         //退出while要count-1
-        WhileStmt *whileStmtNode = $<while>5;
-        whileStmtNode->setStmt($6);
+        StmtNode *whileStmtNode = $<stmttype>5;
+        ((WhileStmt*)whileStmtNode)->setStmt($6);
         whileStack.pop();
         --count;
         $$ = whileStmtNode;
@@ -152,14 +152,14 @@ WhileStmt
     ;
 BreakStmt
     : BREAK SEMICOLON {
-        WhileStmt *whlieStmt = whileStack.top();
+        StmtNode *whileStmt = whileStack.top();
         $$ = new BreakStmt(whileStmt);
     }
     ;
 ContinueStmt
     : CONTINUE SEMICOLON {
-        WhileStmt *whlieStmt = whileStack.top();
-        $$ = new ContinueStmt(whlieStmt);
+        StmtNode *whileStmt = whileStack.top();
+        $$ = new ContinueStmt(whileStmt);
     }
     ;
 ReturnStmt
@@ -458,7 +458,7 @@ FuncDef
         DeclStmt* fparam = (DeclStmt*)$5;
         while (fparam) {
             vec.push_back(fparam->getId()->getSymbolEntry()->getType());
-            vec_se.push_back(temp->getId()->getSymbolEntry());
+            vec_se.push_back(fparam->getId()->getSymbolEntry());
             fparam = (DeclStmt*)(fparam->brother());
         }
         funcType = new FunctionType($1, vec, vec_se);

@@ -29,7 +29,7 @@ std::string ConstantSymbolEntry::toStr()
     return buffer.str();
 }
 
-IdentifierSymbolEntry::IdentifierSymbolEntry(Type *type, std::string name, int scope) : SymbolEntry(type, SymbolEntry::VARIABLE), name(name)
+IdentifierSymbolEntry::IdentifierSymbolEntry(Type *type, std::string name, int scope, bool sysy) : SymbolEntry(type, SymbolEntry::VARIABLE), name(name)
 {
     this->scope = scope;
     addr = nullptr;
@@ -43,13 +43,13 @@ void IdentifierSymbolEntry::setFloatValue(float value) {
     this->floatValue = value;
 }
 
-void IdentifierSymbolEntry::setIntArray(int *arrayValue) {
-    this->intArrayValue = arrayValue;
-}
+// void IdentifierSymbolEntry::setIntArray(int *arrayValue) {
+//     this->intArrayValue = arrayValue;
+// }
 
-void IdentifierSymbolEntry::setFloatArray(float *arrayValue) {
-    this->floatArrayValue = arrayValue;
-}
+// void IdentifierSymbolEntry::setFloatArray(float *arrayValue) {
+//     this->floatArrayValue = arrayValue;
+// }
 
 std::string IdentifierSymbolEntry::toStr()
 {

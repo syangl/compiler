@@ -536,6 +536,7 @@ bool Ast::typeCheck(Type* retType)
     if(root != nullptr){
         root->typeCheck();
     }
+    return false;
 }
 
 bool ContinueStmt::typeCheck(Type* retType) {//参数可能用不到，但不写调用可能出错
@@ -561,7 +562,7 @@ bool EmptyStmt::typeCheck(Type* retType) {
 bool FunctionCallExpr::typeCheck(Type* retType) {
     return false;
 }
-FunctionCallExpr::FunctionCallExpr(SymbolEntry* se, ExprNode* param = nullptr): ExprNode(se), param(param){
+FunctionCallExpr::FunctionCallExpr(SymbolEntry* se, ExprNode* param): ExprNode(se), param(param){
     // 创建函数调用节点时参数有可能不匹配，应该在构造时就发现错误
     SymbolEntry *tmp_se = se;
     long unsigned int count = 0;
@@ -675,7 +676,7 @@ bool FunctionDef::typeCheck(Type* retType)
     return false;
 }
 
-bool BinaryExpr::typeCheck(Type* retType = nullptr)
+bool BinaryExpr::typeCheck(Type* retType)
 {
     return false;
 }
@@ -748,17 +749,17 @@ BinaryExpr::BinaryExpr(SymbolEntry* se, int op, ExprNode* expr1, ExprNode* expr2
     }
 }
 
-bool Constant::typeCheck(Type* retType = nullptr)
+bool Constant::typeCheck(Type* retType)
 {
     return false;
 }
 
-bool Id::typeCheck(Type* retType = nullptr)
+bool Id::typeCheck(Type* retType)
 {
     return false;
 }
 
-bool IfStmt::typeCheck(Type* retType = nullptr)
+bool IfStmt::typeCheck(Type* retType)
 {
     // Todo
     if (thenStmt != nullptr){
@@ -768,7 +769,7 @@ bool IfStmt::typeCheck(Type* retType = nullptr)
     return false;
 }
 
-bool IfElseStmt::typeCheck(Type* retType = nullptr)
+bool IfElseStmt::typeCheck(Type* retType)
 {
     // Todo
     bool res_then = false, res_else = false;
@@ -781,7 +782,7 @@ bool IfElseStmt::typeCheck(Type* retType = nullptr)
     return res_then || res_else;
 }
 
-bool CompoundStmt::typeCheck(Type* retType = nullptr)
+bool CompoundStmt::typeCheck(Type* retType)
 {
     // Todo
     if (stmt != nullptr){
@@ -791,7 +792,7 @@ bool CompoundStmt::typeCheck(Type* retType = nullptr)
     return false;
 }
 
-bool SeqNode::typeCheck(Type* retType = nullptr)
+bool SeqNode::typeCheck(Type* retType)
 {
     // Todo
     bool res_stmt1 = false, res_stmt2 = false;
@@ -804,12 +805,12 @@ bool SeqNode::typeCheck(Type* retType = nullptr)
     return res_stmt1 || res_stmt2;
 }
 
-bool DeclStmt::typeCheck(Type* retType = nullptr)
+bool DeclStmt::typeCheck(Type* retType)
 {
     return false;
 }
 
-bool ReturnStmt::typeCheck(Type* retType = nullptr)
+bool ReturnStmt::typeCheck(Type* retType)
 {
     // 如果在函数定义外
     if (retType == nullptr) {
@@ -833,7 +834,7 @@ bool ReturnStmt::typeCheck(Type* retType = nullptr)
     return true;
 }
 
-bool AssignStmt::typeCheck(Type* retType = nullptr)
+bool AssignStmt::typeCheck(Type* retType)
 {
     return false;
 }
@@ -855,6 +856,18 @@ AssignStmt::AssignStmt(ExprNode* lval, ExprNode* expr): lval(lval), expr(expr) {
 void ImplictCastExpr::output(int level) {
     fprintf(yyout, "%*cImplictCastExpr\ttype: %s to %s\n", level, ' ', expr->getType()->toStr().c_str(), type->toStr().c_str());
     this->expr->output(level + 4);
+}
+
+void ImplictCastExpr::genCode() {
+    expr->genCode();
+    BasicBlock* bb = builder->getInsertBB();
+    Function* func = bb->getParent();
+    BasicBlock* truebb = new BasicBlock(func);
+    BasicBlock* tmpbb = new BasicBlock(func);
+    BasicBlock* falsebb = new BasicBlock(func);
+    new CmpInstruction(CmpInstruction::NE, this->dst, this->expr->getOperand(), new Operand(new ConstantSymbolEntry(TypeSystem::intType, 0)), bb);
+    this->trueList().push_back(new CondBrInstruction(truebb, tmpbb, this->dst, bb));
+    this->falseList().push_back(new UncondBrInstruction(falsebb, tmpbb));
 }
 
 void BinaryExpr::output(int level)
@@ -938,13 +951,6 @@ void FunctionCallExpr::output(int level) {
     }
 }
 
-void Ast::output()
-{
-    fprintf(yyout, "program\n");
-    if(root != nullptr)
-        root->output(4);
-}
-
 void Constant::output(int level)
 {
     std::string type, value;
@@ -1000,7 +1006,15 @@ void IfElseStmt::output(int level)
     elseStmt->output(level + 4);
 }
 
-void WhileStmt::output(int level) 
+WhileStmt::WhileStmt(ExprNode *cond, StmtNode *stmt): cond(cond), stmt(stmt)
+{
+    if (cond->getType()->isInt() && cond->getType()->getSize() == 32){
+        ImplictCastExpr *tmp = new ImplictCastExpr(cond);
+        this->cond = tmp;
+    }
+}
+
+void WhileStmt::output(int level)
 {
     fprintf(yyout, "%*cWhileStmt\n", level, ' ');
     cond->output(level + 4);

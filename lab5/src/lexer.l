@@ -234,7 +234,8 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
-    Type *func = new FunctionType(TypeSystem::intType, vec);
+    std::vector<SymbolEntry*> vec1;
+    Type *func = new FunctionType(TypeSystem::intType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -254,7 +255,8 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
-    Type *func = new FunctionType(TypeSystem::intType, vec);
+    std::vector<SymbolEntry*> vec1;
+    Type *func = new FunctionType(TypeSystem::intType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -275,7 +277,8 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
-    Type *func = new FunctionType(TypeSystem::floatType, vec);
+    std::vector<SymbolEntry*> vec1;
+    Type *func = new FunctionType(TypeSystem::floatType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -295,8 +298,9 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
+    std::vector<SymbolEntry*> vec1;
     vec.push_back(TypeSystem::intType);
-    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    Type *func = new FunctionType(TypeSystem::voidType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -316,8 +320,9 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
+    std::vector<SymbolEntry*> vec1;
     vec.push_back(TypeSystem::intType);
-    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    Type *func = new FunctionType(TypeSystem::voidType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -338,8 +343,9 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
+    std::vector<SymbolEntry*> vec1;
     vec.push_back(TypeSystem::floatType);
-    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    Type *func = new FunctionType(TypeSystem::voidType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -363,7 +369,8 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
-    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    std::vector<SymbolEntry*> vec1;
+    Type *func = new FunctionType(TypeSystem::voidType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){
@@ -383,7 +390,8 @@ COMMENTEND "*/"
     yylval.strtype = lexeme;
     // create FunctionType
     std::vector<Type*> vec;
-    Type *func = new FunctionType(TypeSystem::voidType, vec);
+    std::vector<SymbolEntry*> vec1;
+    Type *func = new FunctionType(TypeSystem::voidType, vec, vec1);
     // create SymbolEntry
     SymbolTable *symt = identifiers;
     while(symt->getPrev()){

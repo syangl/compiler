@@ -2,6 +2,7 @@
 #define __TYPE_H__
 #include <vector>
 #include <string>
+#include "SymbolTable.h"
 
 class Type
 {
@@ -9,7 +10,7 @@ private:
     int kind;
     int size;
 protected:
-    enum {INT, VOID, FUNC, ARRAY, FLOAT};
+    enum {INT, VOID, FUNC, PTR, ARRAY, FLOAT};
 public:
     Type(int kind, int size = 0) : kind(kind), size(size) {};
     virtual ~Type() {};
@@ -19,6 +20,7 @@ public:
     bool isFunc() const {return kind == FUNC;};
     bool isArray() const {return kind == ARRAY;};
     bool isFloat() const {return kind == FLOAT;};
+    bool isPtr() const {return kind == PTR;};
     int getSize() const { return size; };
     void setSize(int s) {size = s;};
     int getKind() const {return kind;};
