@@ -17,12 +17,24 @@ Node::Node()
     bro = nullptr;
 }
 
-Node* Node::getRightestBro(){
-    Node* node = this;
-    while(node->brother()){
-        node = node->brother();
+// Node* Node::getRightestBro(){
+//     Node* node = this;
+//     while(node->brother()){
+//         node = node->brother();
+//     }
+//     return node;
+// }
+
+void Node::getRightestBro(Node* node) {
+    Node* n = this;
+    while (n->brother()) {
+        n = n->brother();
     }
-    return node;
+    if (n == this) {
+        this->bro = node;
+    } else {
+        n->getRightestBro(node);
+    }
 }
 
 int BinaryExpr::intValue() {
@@ -143,7 +155,14 @@ void FunctionDef::genCode()
     */
     for (auto block = func->begin(); block != func->end(); block++){
         //???...
+        // Instruction* i = (*block)->begin();
         Instruction* last = (*block)->rbegin();
+        // while (i != last) {
+        //     if (i->isCond() || i->isUncond()) {
+        //         (*block)->remove(i);
+        //     }
+        //     i = i->getNext();
+        // }
         if (last->isCond()) {
             BasicBlock *trueBranch;
             BasicBlock *falseBranch;
@@ -161,6 +180,8 @@ void FunctionDef::genCode()
         }
         else if (last->isUncond()){
             BasicBlock *destination = (dynamic_cast<UncondBrInstruction *>(last))->getBranch();
+            (*block)->addSucc(destination);
+            destination->addPred(*block);
             if (destination->empty() == true){
                 if (((FunctionType *)(se->getType()))->getRetType() == TypeSystem::intType){
                     new RetInstruction(new Operand(new ConstantSymbolEntry(TypeSystem::intType, 0)), destination);
@@ -169,8 +190,6 @@ void FunctionDef::genCode()
                     new RetInstruction(nullptr, destination);
                 }
             }
-            (*block)->addSucc(destination);
-            destination->addPred(*block);
         }
         else {
             if (last->isRet() == false){
@@ -939,15 +958,17 @@ void UnaryExpr::output(int level)
 void FunctionCallExpr::output(int level) {
     std::string name, type;
     int scope;
-    name = symbolEntry->toStr();
-    type = symbolEntry->getType()->toStr();
-    scope = dynamic_cast<IdentifierSymbolEntry*>(symbolEntry)->getScope();
-    fprintf(yyout, "%*cCallee\tfunction name: %s\ttype: %s\tscope:  %d\n",
-            level, ' ', name.c_str(), type.c_str(), scope);
-    Node* tmp = param;
-    while (tmp) {
-        tmp->output(level + 4);
-        tmp = tmp->brother();
+    if (symbolEntry){
+        name = symbolEntry->toStr();
+        type = symbolEntry->getType()->toStr();
+        scope = dynamic_cast<IdentifierSymbolEntry *>(symbolEntry)->getScope();
+        fprintf(yyout, "%*cCallee\tfunction name: %s\ttype: %s\tscope:  %d\n",
+                    level, ' ', name.c_str(), type.c_str(), scope);
+        Node *tmp = param;
+        while (tmp){
+            tmp->output(level + 4);
+            tmp = tmp->brother();
+        }
     }
 }
 

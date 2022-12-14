@@ -1,0 +1,5 @@
+redefinition of 'func func'
+redefinition of 'error_func error_func'
+too many arguments to function @func i32(i32)
+timeout: the monitored command dumped core
+Segmentation fault

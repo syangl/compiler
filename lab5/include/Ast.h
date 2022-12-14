@@ -31,7 +31,8 @@ public:
     int getSeq() const {return seq;};
     static void setIRBuilder(IRBuilder*ib) {builder = ib;};
     virtual void output(int level) = 0;
-    Node *getRightestBro();
+    // Node *getRightestBro();
+    void getRightestBro(Node* node);
     Node *brother(){return bro;};
     virtual bool typeCheck(Type* retType = nullptr) = 0;
     virtual void genCode() = 0;
@@ -185,7 +186,11 @@ private:
     Id *id;
     ExprNode* expr;
 public:
-    DeclStmt(Id *id, ExprNode* expr = nullptr) : id(id), expr(expr){};
+    DeclStmt(Id *id, ExprNode* expr = nullptr) : id(id){
+        if (expr) {
+            this->expr = expr;
+        }
+    };
     void output(int level);
     Id *getId() const {return id;};
     bool typeCheck(Type* retType = nullptr);

@@ -226,12 +226,12 @@ UnaryExp
     | 
     SUB UnaryExp {
         SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
-        $$ = new UnaryExpr(nullptr, UnaryExpr::SUB, $2);
+        $$ = new UnaryExpr(se, UnaryExpr::SUB, $2);
     }
     | 
     NOT UnaryExp {
         SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
-        $$ = new UnaryExpr(nullptr, UnaryExpr::NOT, $2);
+        $$ = new UnaryExpr(se, UnaryExpr::NOT, $2);
     }
     ;
 MulExp
@@ -337,10 +337,11 @@ FuncRParams
     | 
     FuncRParams COMMA Exp {
         $$ = $1;
-        Node *tmp;
-        tmp = tmp;
-        tmp = $1->getRightestBro()->brother();
-        tmp = $3; 
+        // Node *tmp;
+        // tmp = tmp;
+        // tmp = $1->getRightestBro()->brother();
+        // tmp = $3; 
+        $$->getRightestBro($3);
     }
     ;
 Type
@@ -374,10 +375,11 @@ VarDefList
     :
     VarDefList COMMA VarDef {
         $$ = $1;
-        Node *tmp;
-        tmp = tmp;
-        tmp = $1->getRightestBro()->brother();
-        tmp = $3;
+        // Node *tmp;
+        // tmp = tmp;
+        // tmp = $1->getRightestBro()->brother();
+        // tmp = $3;
+        $$->getRightestBro($3);
     } 
     | 
     VarDef {$$ = $1;}
@@ -386,10 +388,11 @@ ConstDefList
     :
     ConstDefList COMMA ConstDef {
         $$ = $1;
-        Node *tmp;
-        tmp = tmp;
-        tmp = ($1->getRightestBro()->brother());
-        tmp = $3; // TODO
+        // Node *tmp;
+        // tmp = tmp;
+        // tmp = ($1->getRightestBro()->brother());
+        // tmp = $3; // TODO
+        $$->getRightestBro($3);
     }
     |
     ConstDef {$$ = $1;}
@@ -494,10 +497,11 @@ FuncFParams
     |
     FuncFParams COMMA FuncFParam {
         $$ = $1;
-        Node *tmp;
-        tmp = tmp;
-        tmp = ($1->getRightestBro()->brother());
-        tmp = $3;
+        // Node *tmp;
+        // tmp = tmp;
+        // tmp = ($1->getRightestBro()->brother());
+        // tmp = $3;
+        $$->getRightestBro($3);
     }
     ;
 FuncFParam
