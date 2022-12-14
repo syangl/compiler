@@ -17,7 +17,14 @@ Type* TypeSystem::constFloatType = &commonConstFloat;
 
 std::string IntType::toStr()
 {
-    return constant ? "const int" : "int";
+    // return constant ? "const int" : "int";
+    std::ostringstream buffer;
+    if (constant)
+        buffer << "i";
+    else
+        buffer << "i";
+    buffer << size;
+    return buffer.str();
 }
 
 std::string VoidType::toStr()

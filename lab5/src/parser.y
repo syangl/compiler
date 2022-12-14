@@ -22,6 +22,7 @@
     char* strtype;
     StmtNode* stmttype;
     ExprNode* exprtype;
+    SymbolEntry* se;
     Type* type;
 }
 
@@ -145,9 +146,9 @@ WhileStmt
         //退出while要count-1
         StmtNode *whileStmtNode = $<stmttype>5;
         ((WhileStmt*)whileStmtNode)->setStmt($6);
+        $$ = whileStmtNode;
         whileStack.pop();
         --count;
-        $$ = whileStmtNode;
     }
     ;
 BreakStmt
@@ -166,6 +167,10 @@ ReturnStmt
     :
     RETURN Exp SEMICOLON{
         $$ = new ReturnStmt($2);
+    }
+    |
+    RETURN SEMICOLON {
+        $$ = new ReturnStmt();
     }
     ;
 Exp
@@ -270,25 +275,25 @@ RelExp
     |
     RelExp LESS AddExp
     {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::LESS, $1, $3);
     }
     | 
     RelExp LEQU AddExp
     {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::LEQU, $1, $3);
     }
     | 
     RelExp GREAT AddExp
     {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::GREAT, $1, $3);
     }
     | 
     RelExp GEQU AddExp
     {
-        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        SymbolEntry *se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::GEQU, $1, $3);
     }
     ;
@@ -297,12 +302,12 @@ EqExp
     RelExp {$$ = $1;}
     |
     EqExp EQUAL RelExp {
-        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::EQUAL, $1, $3);
     }
     |
     EqExp NOTEQUAL RelExp {
-        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+        SymbolEntry* se = new TemporarySymbolEntry(TypeSystem::boolType, SymbolTable::getLabel());
         $$ = new BinaryExpr(se, BinaryExpr::NOTEQUAL, $1, $3);
     }
     ;
@@ -425,7 +430,7 @@ ConstDef
         bool success = identifiers->install($1, se);
         if(!success){
             fprintf(stderr, "identifier \"%s\" is already defined\n", (char*)$1);
-        }
+        }//...
         ((IdentifierSymbolEntry*)se)->setValue($3->intValue());
         $$ = new DeclStmt(new Id(se), $3);
         delete []$1; 
@@ -439,7 +444,7 @@ ConstInitVal
      ;
 InitVal
     : Exp {
-    if(!$1->getType()->isInt()){
+        if(!$1->getType()->isInt()){
             fprintf(stderr, "cannot initialize a variable of type \"int\" with a rvalue of type \'%s\'\n",
                 $1->getType()->toStr().c_str());
         }
@@ -465,15 +470,16 @@ FuncDef
         SymbolEntry *se = new IdentifierSymbolEntry(funcType, $2, identifiers->getPrev()->getLevel());
         bool success = identifiers->getPrev()->install($2, se);
         if(!success){
-            fprintf(stderr, "redefinition of \'%s %s\'\n", $2, se->getType()->toStr().c_str());
+            fprintf(stderr, "redefinition of \'%s %s\'\n", $2, ((IdentifierSymbolEntry*)se)->getName().c_str()/*se->getType()->toStr().c_str()*/);
         }
+        $<se>$ = se;
     }
     BlockStmt
     {
-        SymbolEntry *se;
-        se = identifiers->lookup($2);
-        assert(se != nullptr);
-        $$ = new FunctionDef(se, $8, (DeclStmt*)$5);
+        // SymbolEntry *se;
+        // se = identifiers->lookup($2);
+        // assert(se != nullptr);
+        $$ = new FunctionDef($<se>7, $8, (DeclStmt*)$5);
         SymbolTable *top = identifiers;
         identifiers = identifiers->getPrev();
         delete top;

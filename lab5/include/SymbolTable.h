@@ -7,6 +7,7 @@
 class Type;
 class Operand;
 
+
 class SymbolEntry
 {
 private:
@@ -25,6 +26,24 @@ public:
     void setType(Type *type) {this->type = type;};
     virtual std::string toStr() = 0;
     // You can add any function you need here.
+};
+
+// symbol table managing identifier symbol entries
+class SymbolTable
+{
+private:
+    std::map<std::string, SymbolEntry*> symbolTable;
+    SymbolTable *prev;
+    int level;
+    static int counter;
+public:
+    SymbolTable();
+    SymbolTable(SymbolTable *prev);
+    bool install(std::string name, SymbolEntry* entry);
+    SymbolEntry* lookup(std::string name);
+    SymbolTable* getPrev() {return prev;};
+    int getLevel() {return level;};
+    static int getLabel() {return counter++;};
 };
 
 
@@ -105,8 +124,11 @@ public:
     // int *getIntArray() const {return intArrayValue;};
     // void setFloatArray(float *floatArrayValue);
     // float *getFloatArray() const {return floatArrayValue;};
+    int getLabel() const {return label;};
+    void setLabel() {label = SymbolTable::getLabel();};
     void setAddr(Operand *addr) {this->addr = addr;};
     Operand* getAddr() {return addr;};
+    std::string getName() const {return name;};
     // You can add any function you need here.
 };
 
@@ -141,23 +163,7 @@ public:
     // You can add any function you need here.
 };
 
-// symbol table managing identifier symbol entries
-class SymbolTable
-{
-private:
-    std::map<std::string, SymbolEntry*> symbolTable;
-    SymbolTable *prev;
-    int level;
-    static int counter;
-public:
-    SymbolTable();
-    SymbolTable(SymbolTable *prev);
-    bool install(std::string name, SymbolEntry* entry);
-    SymbolEntry* lookup(std::string name);
-    SymbolTable* getPrev() {return prev;};
-    int getLevel() {return level;};
-    static int getLabel() {return counter++;};
-};
+
 
 extern SymbolTable *identifiers;
 extern SymbolTable *globals;

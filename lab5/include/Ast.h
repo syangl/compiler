@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include "Operand.h"
+#include "Type.h"
 
 class SymbolEntry;
 class Unit;
@@ -121,7 +122,7 @@ public:
 class Constant : public ExprNode
 {
 public:
-    Constant(SymbolEntry *se) : ExprNode(se){dst = new Operand(se);};
+    Constant(SymbolEntry *se) : ExprNode(se){dst = new Operand(se);type = TypeSystem::intType;};
     void output(int level);
     int intValue();
     bool typeCheck(Type* retType = nullptr);
@@ -132,7 +133,15 @@ public:
 class Id : public ExprNode
 {
 public:
-    Id(SymbolEntry *se) : ExprNode(se){SymbolEntry *temp = new TemporarySymbolEntry(se->getType(), SymbolTable::getLabel()); dst = new Operand(temp);};
+    Id(SymbolEntry *se) : ExprNode(se){
+        if (se != nullptr){
+            type = se->getType();
+            SymbolEntry *temp = new TemporarySymbolEntry(TypeSystem::intType, SymbolTable::getLabel());
+            dst = new Operand(temp);
+        }
+        // SymbolEntry *temp = new TemporarySymbolEntry(se->getType(), SymbolTable::getLabel()); 
+        // dst = new Operand(temp);
+    };
     void output(int level);
     int intValue();
     bool typeCheck(Type* retType = nullptr);
@@ -151,7 +160,7 @@ class CompoundStmt : public StmtNode
 private:
     StmtNode *stmt;
 public:
-    CompoundStmt(StmtNode *stmt) : stmt(stmt) {};
+    CompoundStmt(StmtNode *stmt = nullptr) : stmt(stmt) {};
     void output(int level);
     bool typeCheck(Type* retType = nullptr);
     void genCode();
@@ -174,7 +183,7 @@ class DeclStmt : public StmtNode
 {
 private:
     Id *id;
-    ExprNode* expr = nullptr;
+    ExprNode* expr;
 public:
     DeclStmt(Id *id, ExprNode* expr = nullptr) : id(id), expr(expr){};
     void output(int level);
@@ -200,7 +209,12 @@ private:
     ExprNode *cond;
     StmtNode *thenStmt;
 public:
-    IfStmt(ExprNode *cond, StmtNode *thenStmt) : cond(cond), thenStmt(thenStmt){};
+    IfStmt(ExprNode *cond, StmtNode *thenStmt) : cond(cond), thenStmt(thenStmt){
+        if (cond->getType()->isInt() && cond->getType()->getSize() == 32){
+            ImplictCastExpr *temp = new ImplictCastExpr(cond);
+            this->cond = temp;
+        }
+    };
     void output(int level);
     bool typeCheck(Type* retType = nullptr);
     void genCode();
@@ -214,7 +228,12 @@ private:
     StmtNode *thenStmt;
     StmtNode *elseStmt;
 public:
-    IfElseStmt(ExprNode *cond, StmtNode *thenStmt, StmtNode *elseStmt) : cond(cond), thenStmt(thenStmt), elseStmt(elseStmt) {};
+    IfElseStmt(ExprNode *cond, StmtNode *thenStmt, StmtNode *elseStmt) : cond(cond), thenStmt(thenStmt), elseStmt(elseStmt) {
+        if (cond->getType()->isInt() && cond->getType()->getSize() == 32){
+            ImplictCastExpr *temp = new ImplictCastExpr(cond);
+            this->cond = temp;
+        }
+    };
     void output(int level);
     bool typeCheck(Type* retType = nullptr);
     void genCode();
@@ -268,7 +287,7 @@ class ReturnStmt : public StmtNode
 private:
     ExprNode *retValue;
 public:
-    ReturnStmt(ExprNode*retValue) : retValue(retValue) {};
+    ReturnStmt(ExprNode*retValue = nullptr) : retValue(retValue) {};
     void output(int level);
     bool typeCheck(Type* retType = nullptr);
     void genCode();

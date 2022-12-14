@@ -8,8 +8,8 @@ class Type
 {
 private:
     int kind;
-    int size;
 protected:
+    int size;
     enum {INT, VOID, FUNC, PTR, ARRAY, FLOAT};
 public:
     Type(int kind, int size = 0) : kind(kind), size(size) {};

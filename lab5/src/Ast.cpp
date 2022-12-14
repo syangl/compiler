@@ -142,7 +142,7 @@ void FunctionDef::genCode()
      * Todo
     */
     for (auto block = func->begin(); block != func->end(); block++){
-        //???
+        //???...
         Instruction* last = (*block)->rbegin();
         if (last->isCond()) {
             BasicBlock *trueBranch;
@@ -249,9 +249,9 @@ void BinaryExpr::genCode()
         }
         new CmpInstruction(opcode, dst, src1, src2, bb);
 
+        BasicBlock *temp_bb = new BasicBlock(func);
         BasicBlock *true_bb = new BasicBlock(func);
         BasicBlock *false_bb = new BasicBlock(func);
-        BasicBlock *temp_bb = new BasicBlock(func);
         true_list.push_back(new CondBrInstruction(true_bb, temp_bb, dst, bb));
         false_list.push_back(new UncondBrInstruction(false_bb, temp_bb));
     }
@@ -928,7 +928,7 @@ void UnaryExpr::output(int level)
             op_str = "not";
             break;
         case SUB:
-            op_str = "negative";
+            op_str = "negative";//...
             break;
     }
     fprintf(yyout, "%*cUnaryExpr\top: %s\n", level, ' ', op_str.c_str());
