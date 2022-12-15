@@ -13,25 +13,17 @@ int main()
     return min;
 }*/
 
-int enc(int a)
-{
-   if(a>25)
-   a=a+60;
-   else
-   {
-       a=a-15;
-   }
 
-   return a;
-   
+
+int a() {
+  return 0;
 }
 
-int main()
-{
-    int a;
-    a=400;
-    int res;
-    res=enc(a);
+int b() {
 
-    return 0;
+  return 0;
 }
+int c() {
+  return 0;
+}
+

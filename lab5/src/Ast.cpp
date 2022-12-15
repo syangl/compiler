@@ -24,7 +24,7 @@ Node::Node()
 //     }
 //     return node;
 // }
-
+// 上面的实现错了
 void Node::getRightestBro(Node* node) {
     Node* n = this;
     while (n->brother()) {
@@ -144,10 +144,12 @@ void FunctionDef::genCode()
     BasicBlock *entry = func->getEntry();
     // set the insert point to the entry basicblock of this function.
     builder->setInsertBB(entry);
-    if (decl){
+    if (decl != nullptr){
         decl->genCode();
     }
-    stmt->genCode();
+    if (stmt != nullptr){
+        stmt->genCode();
+    }
 
     /**
      * Construct control flow graph. You need do set successors and predecessors for each basic block.
@@ -155,14 +157,7 @@ void FunctionDef::genCode()
     */
     for (auto block = func->begin(); block != func->end(); block++){
         //???...
-        // Instruction* i = (*block)->begin();
         Instruction* last = (*block)->rbegin();
-        // while (i != last) {
-        //     if (i->isCond() || i->isUncond()) {
-        //         (*block)->remove(i);
-        //     }
-        //     i = i->getNext();
-        // }
         if (last->isCond()) {
             BasicBlock *trueBranch;
             BasicBlock *falseBranch;
@@ -840,15 +835,17 @@ bool ReturnStmt::typeCheck(Type* retType)
         fprintf(stderr, "return-statement with no value, in function returning \"%s\"\n",retType->toStr().c_str());
         return true;
     }
-    if ((retType != nullptr) && (retType->isVoid() == true)){
+    if ((retValue != nullptr) && (retType->isVoid() == true)){
         fprintf(stderr, "return-statement with a value, in function returning \"%s\"\n",retType->toStr().c_str());
         return true;
     }
-    Type* type = retValue->getType();
-    if (type != retType) {
-        fprintf(stderr, "cannot initialize return object of type \"%s\" with an rvalue of type \"%s\"\n",
-                retType->toStr().c_str(), type->toStr().c_str());
-        return true;
+    if (retValue && retValue->getSymbolEntry()){
+        Type *type = retValue->getType();
+        if (type != retType){
+            fprintf(stderr, "cannot initialize return object of type \"%s\" with an rvalue of type \"%s\"\n",
+                    retType->toStr().c_str(), type->toStr().c_str());
+            return true;
+        }
     }
     return true;
 }
@@ -1055,7 +1052,9 @@ void ContinueStmt::output(int level)
 void ReturnStmt::output(int level)
 {
     fprintf(yyout, "%*cReturnStmt\n", level, ' ');
-    retValue->output(level + 4);
+    if (retValue != nullptr){
+        retValue->output(level + 4);
+    }
 }
 
 void AssignStmt::output(int level)

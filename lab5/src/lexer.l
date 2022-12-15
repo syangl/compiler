@@ -24,7 +24,7 @@
 
 FLOATDEC ((0|[1-9][0-9]*)\.[0-9][0-9]*[eE][+-]([1-9][0-9]*|0))
 OCTAL (0([1-7][0-7]*|0))
-HEXADECIMAL (0[xX][0-9a-fA-f]+)
+HEXADECIMAL (0[xX][0-9A-Fa-f]+)
 DECIMIAL ([1-9][0-9]*|0)
 ID [[:alpha:]_][[:alpha:][:digit:]_]*
 EOL (\r\n|\n|\r)
@@ -418,7 +418,7 @@ COMMENTEND "*/"
 }
 {HEXADECIMAL} {
     int hex;
-    sscanf(yytext, "%o", &hex);
+    sscanf(yytext, "%x", &hex);
     if(dump_tokens)
         DEBUG_FOR_LAB4(yytext);
     yylval.itype = hex;
