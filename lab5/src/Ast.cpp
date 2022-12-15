@@ -156,8 +156,17 @@ void FunctionDef::genCode()
      * Todo
     */
     for (auto block = func->begin(); block != func->end(); block++){
-        //???...
-        Instruction* last = (*block)->rbegin();
+        //???
+        Instruction *last = (*block)->rbegin();
+        Instruction *q = (*block)->begin();
+        // 102有个块中间多了一条分支???
+        while (q != last){
+            if (q->isCond() || q->isUncond()){
+                (*block)->remove(q);
+            }
+            q = q->getNext();
+        }
+        
         if (last->isCond()) {
             BasicBlock *trueBranch;
             BasicBlock *falseBranch;
