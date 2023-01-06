@@ -42,6 +42,7 @@ public:
     bool isVReg() { return this->type == VREG; };
     bool isLabel() { return this->type == LABEL; };
     int getVal() {return this->val; };
+    void setVal(int val) {this->val = val;};
     int getReg() {return this->reg_no; };
     void setReg(int regno) {this->type = REG; this->reg_no = regno;};
     std::string getLabel() {return this->label; };
@@ -75,6 +76,9 @@ public:
     MachineBlock* getParent() const {return parent;};
     void insertBefore(MachineInstruction*);
     void insertAfter(MachineInstruction*);
+    bool isBx() const {return type == BRANCH && op == 2;};
+    bool isAdd() const {return type == BINARY && op == 0;};
+    bool isStore() const {return type == STORE;};
     std::vector<MachineOperand*>& getDef() {return def_list;};
     std::vector<MachineOperand*>& getUse() {return use_list;};
 };
@@ -198,6 +202,7 @@ public:
     int AllocSpace(int size) { this->stack_size += size; return this->stack_size; };
     void InsertBlock(MachineBlock* block) { this->block_list.push_back(block); };
     void addSavedRegs(int regno) {saved_regs.insert(regno);};
+    int getParamNum() const {return paramNum;};
     std::vector<MachineOperand*> getSavedRegs();
     void output();
 };

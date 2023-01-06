@@ -332,6 +332,8 @@ FuncCallInstruction::FuncCallInstruction(Operand *dst, SymbolEntry *func, std::v
         operands.push_back((*param));
         (*param)->addUse(this);
     }
+    // debug 
+    // printf("operands.size=%d\n",operands.size());
 }
 
 FuncCallInstruction::~FuncCallInstruction()
@@ -368,9 +370,15 @@ void FuncCallInstruction::genMachineCode(AsmBuilder *builder)
     MachineInstruction* cur_inst;
     MachineOperand* operand;
     int i = 0;
-    for (auto it = operands.begin(); (it != operands.end()) && (i < 4); ++it, ++i) { // 前四个参数
-        operand = genMachineReg(i);
-        auto src = genMachineOperand(operands[i+1]);
+    // debug 
+    // printf("operands.size=%d\n",operands.size());
+    // 比如调getint()时 size = 1 ，不应该执行循环体，第一次要跳过
+    for (auto it = operands.begin(); (it != operands.end()) && (i < 5); ++it, ++i) { // 前四个参数
+        if (i == 0){
+            continue;
+        }
+        operand = genMachineReg(i-1);
+        auto src = genMachineOperand(operands[i]);
         if (src->isImm() && (src->getVal() > 255)) {
             cur_inst = new LoadMInstruction(cur_block, operand, src);
         } else{

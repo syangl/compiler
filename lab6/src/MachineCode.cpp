@@ -1,4 +1,5 @@
 #include "MachineCode.h"
+#include "Type.h"
 extern FILE* yyout;
 int MachineBlock::label = 0;
 MachineOperand::MachineOperand(int tp, int val)
@@ -83,10 +84,15 @@ void MachineOperand::output()
         PrintReg();
         break;
     case LABEL:
-        if (this->label.substr(0, 2) == ".L")
+        if (this->label.substr(0, 1) == "@"){
+            fprintf(yyout, "%s", this->label.c_str()+1);
+        }
+        else if (this->label.substr(0, 2) == ".L"){
             fprintf(yyout, "%s", this->label.c_str());
-        else
+        }
+        else{
             fprintf(yyout, "addr_%s", this->label.c_str());
+        }
     default:
         break;
     }
@@ -440,14 +446,64 @@ MachineFunction::MachineFunction(MachineUnit* p, SymbolEntry* sym_ptr)
     this->parent = p; 
     this->sym_ptr = sym_ptr; 
     this->stack_size = 0;
-    this->paramNum = ((FunctionType*)(sym_ptr->getType()))->getParamsSe().size();
+    this->paramNum = ((FunctionType*)(sym_ptr->getType()))->getParamsSymbolEntry().size();
 };
 
 void MachineBlock::output()
 {
-    fprintf(yyout, ".L%d:\n", this->no);
-    for(auto iter : inst_list)
-        iter->output();
+    // fprintf(yyout, ".L%d:\n", this->no);
+    // for(auto iter : inst_list)
+    //     iter->output();
+    // 上面的缺少指令，不太对
+    int num = parent->getParamNum();
+    int offset = (parent->getSavedRegs().size() + 2) * 4;
+    bool first = true;
+    if (inst_list.empty() == false) {
+        fprintf(yyout, ".L%d:\n", this->no);
+        for (auto iter : inst_list) {
+            if (iter->isBx()) {
+                auto fp = new MachineOperand(MachineOperand::REG, 11);
+                auto lr = new MachineOperand(MachineOperand::REG, 14);
+                auto cur_inst = new StackMInstrcuton(this, StackMInstrcuton::POP, parent->getSavedRegs(), fp, lr);
+                cur_inst->output();
+            }
+            if ((iter->isStore() == true) && (num > 4)) {
+                MachineOperand* operand = iter->getUse()[0];
+                if (operand->isReg() && (operand->getReg() == 3)) {
+                    if (first == true) {
+                        first = false;
+                    } 
+                    else {
+                        auto fp = new MachineOperand(MachineOperand::REG, 11);
+                        auto r3 = new MachineOperand(MachineOperand::REG, 3);
+                        auto offset2 = new MachineOperand(MachineOperand::IMM, offset);
+                        offset += 4;
+                        auto cur_inst = new LoadMInstruction(this, r3, fp, offset2);
+                        cur_inst->output();
+                    }
+                }
+            }
+            if (iter->isAdd() == true) {
+                auto dst = iter->getDef()[0];
+                auto src1 = iter->getUse()[0];
+                if (dst->isReg() && (dst->getReg() == 13) 
+                && src1->isReg() && (src1->getReg() == 13) && (iter + 1)->isBx()) 
+                {
+                    int size = parent->AllocSpace(0);
+                    if (size < -255 || size > 255) {
+                        auto r1 = new MachineOperand(MachineOperand::REG, 1);
+                        auto offset3 = new MachineOperand(MachineOperand::IMM, size);
+                        (new LoadMInstruction(nullptr, r1, offset3))->output();
+                        iter->getUse()[1]->setReg(1);
+                    } 
+                    else{
+                        iter->getUse()[1]->setVal(size);
+                    }
+                }
+            }
+            iter->output();
+        }
+    }
 }
 
 void MachineFunction::output()
