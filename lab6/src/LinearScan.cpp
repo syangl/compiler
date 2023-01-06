@@ -141,14 +141,14 @@ void LinearScan::computeLiveIntervals()
                         change = true;
                         w1->defs.insert(w2->defs.begin(), w2->defs.end());
                         w1->uses.insert(w2->uses.begin(), w2->uses.end());
-                        w1->start = std::min(w1->start, w2->start);
-                        w1->end = std::max(w1->end, w2->end);
-                        // auto w1Min = std::min(w1->start, w1->end);
-                        // auto w1Max = std::max(w1->start, w1->end);
-                        // auto w2Min = std::min(w2->start, w2->end);
-                        // auto w2Max = std::max(w2->start, w2->end);
-                        // w1->start = std::min(w1Min, w2Min);
-                        // w1->end = std::max(w1Max, w2Max);
+                        // w1->start = std::min(w1->start, w2->start);
+                        // w1->end = std::max(w1->end, w2->end);
+                        auto w1Min = std::min(w1->start, w1->end);
+                        auto w1Max = std::max(w1->start, w1->end);
+                        auto w2Min = std::min(w2->start, w2->end);
+                        auto w2Max = std::max(w2->start, w2->end);
+                        w1->start = std::min(w1Min, w2Min);
+                        w1->end = std::max(w1Max, w2Max);
                         auto it = std::find(intervals.begin(), intervals.end(), w2);
                         if (it != intervals.end())
                             intervals.erase(it);

@@ -472,8 +472,9 @@ void MachineBlock::output()
             }
             if ((iter->isStore() == true) && (num > 4)) {
                 MachineOperand* operand = iter->getUse()[0];
-                if (operand->isReg() && (operand->getReg() == 3)) {
-                    if (first == true) {
+                // 这里下面的实现思路比较巧妙，就学习一下，之前标记了超过r0~r3的寄存器，用r1表示，这里要检查那些寄存器插入一条load指令
+                if (operand->isReg() && (operand->getReg() == 1)) { 
+                    if (first == true) { // 第一个r1是真正的r1，不用插入load指令
                         first = false;
                     } 
                     else {
@@ -541,14 +542,6 @@ void MachineFunction::output()
     // int cnt = 0;
     for(auto iter : block_list){
         iter->output();
-        // cnt += iter->getSize();
-        // if(cnt > 160){
-        //     fprintf(yyout, "\tb .F%d\n", parent->getGlobalNum());
-        //     fprintf(yyout, ".LTORG\n");
-        //     parent->PrintGlobal();
-        //     fprintf(yyout, ".F%d:\n", parent->getGlobalNum()-1);
-        //     cnt = 0;
-        // }
     }
     fprintf(yyout, "\n");
 }
@@ -627,10 +620,8 @@ void MachineUnit::PrintGlobal(){
         // debug
         // printf("global_num=%d\n",global_num);
         fprintf(yyout, "addr_%s:\n", se->toStr().c_str());
-        // fprintf(yyout, "addr_%s%d:\n", se->toStr().c_str(), global_num);
         fprintf(yyout, "\t.word %s\n", se->toStr().c_str());
     }
-    // ++global_num;
 }
 
 std::vector<MachineOperand*> MachineFunction::getSavedRegs() {

@@ -510,7 +510,7 @@ MachineOperand* Instruction::genMachineOperand(Operand* ope)
             if (id_se->getpNo() < 4){ // r0~r3
                 mope = new MachineOperand(MachineOperand::REG,id_se->getpNo());
             }
-            else{ // 1表示r4之后的
+            else{ // 用1表示r4之后的，在MachineBlock::output会用到
                 mope = new MachineOperand(MachineOperand::REG, 1);
             }
         }
@@ -731,6 +731,7 @@ void CmpInstruction::genMachineCode(AsmBuilder* builder)
     }
     cur_inst = new CmpMInstruction(cur_block, src1, src2, opcode);
     cur_block->InsertInst(cur_inst);
+    // 原本实现没有mov，感觉没必要，但是样例102会有寄存器分配的bug，找不到是为什么，所以就按照下面这样实现了
     if (opcode >= CmpInstruction::L && opcode <= CmpInstruction::GE) {
         auto falseOperand = genMachineImm(0);
         auto trueOperand = genMachineImm(1);
