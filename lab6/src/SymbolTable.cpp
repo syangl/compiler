@@ -29,12 +29,14 @@ std::string ConstantSymbolEntry::toStr()
     return buffer.str();
 }
 
-IdentifierSymbolEntry::IdentifierSymbolEntry(Type *type, std::string name, int scope, bool sysy, int pNo) : SymbolEntry(type, SymbolEntry::VARIABLE), name(name), sysy(sysy), pNo(pNo)
+IdentifierSymbolEntry::IdentifierSymbolEntry(Type *type, std::string name, int scope,  int pNo, bool sysy) : SymbolEntry(type, SymbolEntry::VARIABLE), name(name), sysy(sysy), pNo(pNo)
 {
     this->scope = scope;
     addr = nullptr;
     this->label = -1;
     this->constant = false;
+    // debug
+    // printf("name=%s, pNo=%d\n", name, pNo);
 }
 
 void IdentifierSymbolEntry::setValue(int value) {

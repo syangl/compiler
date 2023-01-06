@@ -241,7 +241,7 @@ COMMENTEND "*/"
     while(symt->getPrev()){
         symt = symt->getPrev();
     }
-    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), -1, true); 
     symt->install(yytext, se);
     return ID;
 }
@@ -262,7 +262,7 @@ COMMENTEND "*/"
     while(symt->getPrev()){
         symt = symt->getPrev();
     }
-    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), -1, true); 
     symt->install(yytext, se);
     return ID;
 }
@@ -284,7 +284,7 @@ COMMENTEND "*/"
     while(symt->getPrev()){
         symt = symt->getPrev();
     }
-    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), -1, true); 
     symt->install(yytext, se);
     return ID;
 }
@@ -306,7 +306,7 @@ COMMENTEND "*/"
     while(symt->getPrev()){
         symt = symt->getPrev();
     }
-    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), -1, true); 
     symt->install(yytext, se);
     return ID;
 }
@@ -328,7 +328,7 @@ COMMENTEND "*/"
     while(symt->getPrev()){
         symt = symt->getPrev();
     }
-    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), -1, true); 
     symt->install(yytext, se);
     return ID;
 }
@@ -351,7 +351,7 @@ COMMENTEND "*/"
     while(symt->getPrev()){
         symt = symt->getPrev();
     }
-    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, yytext, symt->getLevel(), -1, true); 
     symt->install(yytext, se);
     return ID;
 }
@@ -380,7 +380,7 @@ COMMENTEND "*/"
     }
     char *tmp = new char[6+strlen(yytext)];
     memcpy(tmp, lexeme, 6+strlen(yytext));
-    SymbolEntry *se = new IdentifierSymbolEntry(func, tmp, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, tmp, symt->getLevel(), -1, true); 
     symt->install(tmp, se);
     return ID;    
 }
@@ -405,7 +405,7 @@ COMMENTEND "*/"
     }
     char *tmp = new char[6+strlen(yytext)];
     memcpy(tmp, lexeme, 14);
-    SymbolEntry *se = new IdentifierSymbolEntry(func, tmp, symt->getLevel(), true, -1); 
+    SymbolEntry *se = new IdentifierSymbolEntry(func, tmp, symt->getLevel(), -1, true); 
     symt->install(tmp, se);
     return ID;   
 }

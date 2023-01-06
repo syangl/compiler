@@ -110,7 +110,7 @@ private:
     bool constant;
 
 public:
-    IdentifierSymbolEntry(Type *type, std::string name, int scope, bool sysy = false, int pNo = -1);
+    IdentifierSymbolEntry(Type *type, std::string name, int scope, int pNo = -1, bool sysy = false);
     virtual ~IdentifierSymbolEntry() {};
     std::string toStr();
     bool isGlobal() const {return scope == GLOBAL;};

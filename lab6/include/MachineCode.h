@@ -210,17 +210,18 @@ public:
 class MachineUnit
 {
 private:
-    int N;
+    // int global_num;
     std::vector<MachineFunction*> func_list;
     std::vector<SymbolEntry*> global_list;
     void PrintGlobalDecl();
 public:
+    // MachineUnit(){global_num = 0;};
     std::vector<MachineFunction*>& getFuncs() {return func_list;};
     std::vector<MachineFunction*>::iterator begin() { return func_list.begin(); };
     std::vector<MachineFunction*>::iterator end() { return func_list.end(); };
     void insertGlobal(SymbolEntry*);
     void InsertFunc(MachineFunction* func) { func_list.push_back(func);};
-    int getN() const {return N;};
+    // int getGlobalNum() const {return global_num;};
     void PrintGlobal();
     void output();
 };

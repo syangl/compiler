@@ -1,7 +1,7 @@
 #include "MachineCode.h"
 #include "Type.h"
 extern FILE* yyout;
-int MachineBlock::label = 0;
+
 MachineOperand::MachineOperand(int tp, int val)
 {
     this->type = tp;
@@ -9,6 +9,9 @@ MachineOperand::MachineOperand(int tp, int val)
         this->val = val;
     else 
         this->reg_no = val;
+    // debug
+    // printf("reg_no=%d\n",this->reg_no);
+
 }
 
 MachineOperand::MachineOperand(std::string label)
@@ -535,17 +538,17 @@ void MachineFunction::output()
     else {
         (new BinaryMInstruction(nullptr, BinaryMInstruction::SUB, sp, sp, size))->output();
     }
-    int cnt = 0;
+    // int cnt = 0;
     for(auto iter : block_list){
         iter->output();
-        cnt += iter->getSize();
-        if(cnt > 160){
-            fprintf(yyout, "\tb .F%d\n", parent->getN());
-            fprintf(yyout, ".LTORG\n");
-            parent->PrintGlobal();
-            fprintf(yyout, ".F%d:\n", parent->getN()-1);
-            cnt = 0;
-        }
+        // cnt += iter->getSize();
+        // if(cnt > 160){
+        //     fprintf(yyout, "\tb .F%d\n", parent->getGlobalNum());
+        //     fprintf(yyout, ".LTORG\n");
+        //     parent->PrintGlobal();
+        //     fprintf(yyout, ".F%d:\n", parent->getGlobalNum()-1);
+        //     cnt = 0;
+        // }
     }
     fprintf(yyout, "\n");
 }
@@ -555,6 +558,8 @@ void MachineUnit::PrintGlobalDecl()
     // TODO
     // You need to print global variable/const declarition code;
     std::vector<int> constIdx;
+    // debug
+    // printf("global_list.size=%d\n",global_list.size());
     if (!global_list.empty())
         fprintf(yyout, "\t.data\n");
     for (uintmax_t i = 0; i < global_list.size(); i++) {
@@ -619,10 +624,13 @@ void MachineUnit::insertGlobal(SymbolEntry *se) {
 void MachineUnit::PrintGlobal(){
     for (auto e : global_list) {
         IdentifierSymbolEntry* se = (IdentifierSymbolEntry*)e;
-        fprintf(yyout, "addr_%s%d:\n", se->toStr().c_str(), N);
+        // debug
+        // printf("global_num=%d\n",global_num);
+        fprintf(yyout, "addr_%s:\n", se->toStr().c_str());
+        // fprintf(yyout, "addr_%s%d:\n", se->toStr().c_str(), global_num);
         fprintf(yyout, "\t.word %s\n", se->toStr().c_str());
     }
-    ++N;
+    // ++global_num;
 }
 
 std::vector<MachineOperand*> MachineFunction::getSavedRegs() {

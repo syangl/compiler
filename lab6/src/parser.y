@@ -511,7 +511,10 @@ FuncFParam
     :
     Type ID {
         SymbolEntry* se;
+        // debug
+        //printf("pNo=%d\n",pNo);
         se = new IdentifierSymbolEntry($1, $2, identifiers->getLevel(), pNo++);
+        //printf("name=%s, pNo=%d\n", ((IdentifierSymbolEntry*)se)->getName().c_str(), ((IdentifierSymbolEntry*)se)->getpNo());
         identifiers->install($2, se);
         ((IdentifierSymbolEntry*)se)->setLabel();
         ((IdentifierSymbolEntry*)se)->setAddr(new Operand(se));

@@ -394,6 +394,7 @@ void DeclStmt::genCode()
         addr_se->setType(new PointerType(se->getType()));
         addr = new Operand(addr_se);
         se->setAddr(addr);
+        mUnit.insertGlobal(se);
         unit.insertGlobal(se);
     }
     else if(se->isLocal() || se->isParam())
