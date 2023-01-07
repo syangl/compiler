@@ -592,6 +592,7 @@ void MachineUnit::output()
     fprintf(yyout, "\t.arch_extension crc\n");
     fprintf(yyout, "\t.arm\n");
     PrintGlobalDecl();
+    fprintf(yyout, "\t.text\n");
     for(auto iter : func_list)
         iter->output();
     PrintGlobal();
