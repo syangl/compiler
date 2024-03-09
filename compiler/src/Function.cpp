@@ -3,6 +3,10 @@
 #include "Type.h"
 #include <list>
 
+/**
+ * Function 是函数模块。函数由多个基本块构成，每个函数都有一个entry 基本块，它是函数的入口结点
+*/
+
 extern FILE* yyout;
 
 Function::Function(Unit *u, SymbolEntry *s)
@@ -50,7 +54,7 @@ void Function::output() const
     std::list<BasicBlock *> q;
     q.push_back(entry);
     v.insert(entry);
-    while (!q.empty())
+    while (!q.empty()) // 函数的后续基本块succ依次output
     {
         auto bb = q.front();
         q.pop_front();
@@ -72,7 +76,7 @@ void Function::genMachineCode(AsmBuilder* builder)
     auto cur_unit = builder->getUnit();
     auto cur_func = new MachineFunction(cur_unit, this->sym_ptr);
     builder->setFunction(cur_func);
-    std::map<BasicBlock*, MachineBlock*> map;
+    std::map<BasicBlock*, MachineBlock*> map; // 中间代码块和目标代码块的映射
     for(auto block : block_list)
     {
         block->genMachineCode(builder);
@@ -81,7 +85,7 @@ void Function::genMachineCode(AsmBuilder* builder)
     // Add pred and succ for every block
     for(auto block : block_list)
     {
-        auto mblock = map[block];
+        auto mblock = map[block]; // map用于给每个manchineBlock建立双向链表
         for (auto pred = block->pred_begin(); pred != block->pred_end(); pred++)
             mblock->addPred(map[*pred]);
         for (auto succ = block->succ_begin(); succ != block->succ_end(); succ++)

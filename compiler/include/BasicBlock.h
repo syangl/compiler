@@ -11,7 +11,7 @@ class BasicBlock
     typedef std::vector<BasicBlock *>::iterator bb_iterator;
 
 private:
-    std::vector<BasicBlock *> pred, succ;
+    std::vector<BasicBlock *> pred, succ; // 后继基本块列表succ
     Instruction *head;
     Function *parent;
     int no;

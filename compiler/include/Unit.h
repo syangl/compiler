@@ -5,6 +5,10 @@
 #include "Function.h"
 #include "AsmBuilder.h"
 
+/**
+ * note：Unit 为编译单元，是中间代码的顶层模块，包含中间代码生成时创建的函数。
+*/
+
 class Unit
 {
     typedef std::vector<Function *>::iterator iterator;

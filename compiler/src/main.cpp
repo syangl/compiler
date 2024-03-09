@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "%s: fail to open output file\n", outfile);
         exit(EXIT_FAILURE);
     }
-    yyparse();
+    yyparse(); // parser程序
     if(dump_ast)
         ast.output();
     ast.typeCheck();

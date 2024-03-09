@@ -1,4 +1,22 @@
 %code top{
+    /**
+     * note：
+     * yacc程序定义：
+     *      定义段：
+     *      %{
+     *        C语言代码
+     *      %}
+     *      定义
+     *      %%
+     *      规则段：语法规则、翻译模式
+     *      %%
+     *      用户子程序段
+     * 
+     * 代码的执行逻辑步骤:
+     *      边扫描输入流，边按规则推导，语法分析树在推导的过程中逐步构建
+     * 
+     * 产生式左部对应是$$，右部按顺序是$1,$2,$3（语义动作大括号部分也算一个$num），最后$其实转成了C代码，进行了树的构建
+    */
     #include <iostream>
     #include <assert.h>
     #include <stack>
@@ -46,7 +64,7 @@
 %%
 Program
     : Stmts {
-        ast.setRoot($1);
+        ast.setRoot($1); // 程序一开始创建语法分析树，边推导边建树
     }
     ;
 Stmts
@@ -63,7 +81,7 @@ Stmt
     | WhileStmt {$$=$1;}
     | BreakStmt {
         if (count != 0){
-            fprintf(stderr, "\"break\" is out of a while statement\n");
+            fprintf(stderr, "\"break\" is out of a while statement\n"); // 在翻译模式语义动作中加入类型检查的内容
         }
         $$=$1;
     }
@@ -459,7 +477,9 @@ InitVal
 FuncDef
     :
     Type ID {
-        identifiers = new SymbolTable(identifiers);
+        // SymbolTable的含参构造函数传递的参数是prev，
+        // 把当前identifiers（调用函数的作用域对应的符号表）变成新创建的identifiers（被调函数的作用域）的前一个表，返回新创建的符号表
+        identifiers = new SymbolTable(identifiers); 
         pNo = 0;
     }
     LPAREN FuncFParams RPAREN {
@@ -470,15 +490,15 @@ FuncDef
         while (fparam) {
             vec.push_back(fparam->getId()->getSymbolEntry()->getType());
             vec_se.push_back(fparam->getId()->getSymbolEntry());
-            fparam = (DeclStmt*)(fparam->brother());
+            fparam = (DeclStmt*)(fparam->brother()); // 参数一个一个push_back
         }
         funcType = new FunctionType($1, vec, vec_se);
-        SymbolEntry *se = new IdentifierSymbolEntry(funcType, $2, identifiers->getPrev()->getLevel());
-        bool success = identifiers->getPrev()->install($2, se);
+        SymbolEntry *se = new IdentifierSymbolEntry(funcType, $2, identifiers->getPrev()->getLevel()); // 创建新的函数类型表项
+        bool success = identifiers->getPrev()->install($2, se);// 插入调用函数的作用域的符号表
         if(!success){
             fprintf(stderr, "redefinition of \'%s %s\'\n", $2, ((IdentifierSymbolEntry*)se)->getName().c_str()/*se->getType()->toStr().c_str()*/);
         }
-        $<se>$ = se;
+        $<se>$ = se; 
     }
     BlockStmt
     {

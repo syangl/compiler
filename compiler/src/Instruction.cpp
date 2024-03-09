@@ -5,6 +5,12 @@
 #include "Type.h"
 extern FILE* yyout;
 
+/**
+ * note：
+ * Instruction 是我们中间代码的指令基类。指令包含有操作码opcode 和操作数operands。
+ * 指令列表由双向循环链表来表示，因此每条指令都有指向前一条及后一条指令的指针prev 和next。
+*/
+
 Instruction::Instruction(unsigned instType, BasicBlock *insert_bb)
 {
     prev = next = this;

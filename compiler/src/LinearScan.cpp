@@ -79,48 +79,7 @@ void LinearScan::computeLiveIntervals()
         Interval *interval = new Interval({du_chain.first->getParent()->getNo(), t, false, 0, 0, {du_chain.first}, du_chain.second});
         intervals.push_back(interval);
     }
-    // for (auto& interval : intervals) {
-    //     auto uses = interval->uses;
-    //     auto begin = interval->start;
-    //     auto end = interval->end;
-    //     for (auto block : func->getBlocks()) {
-    //         auto liveIn = block->getLiveIn();
-    //         auto liveOut = block->getLiveOut();
-    //         bool in = false;
-    //         bool out = false;
-    //         for (auto use : uses)
-    //             if (liveIn.count(use)) {
-    //                 in = true;
-    //                 break;
-    //             }
-    //         for (auto use : uses)
-    //             if (liveOut.count(use)) {
-    //                 out = true;
-    //                 break;
-    //             }
-    //         if (in && out) {
-    //             begin = std::min(begin, (*(block->begin()))->getNo());
-    //             end = std::max(end, (*(block->rbegin()))->getNo());
-    //         } else if (!in && out) {
-    //             for (auto i : block->getInsts())
-    //                 if (i->getDef().size() > 0 &&
-    //                     i->getDef()[0] == *(uses.begin())) {
-    //                     begin = std::min(begin, i->getNo());
-    //                     break;
-    //                 }
-    //             end = std::max(end, (*(block->rbegin()))->getNo());
-    //         } else if (in && !out) {
-    //             begin = std::min(begin, (*(block->begin()))->getNo());
-    //             int temp = 0;
-    //             for (auto use : uses)
-    //                 if (use->getParent()->getParent() == block)
-    //                     temp = std::max(temp, use->getParent()->getNo());
-    //             end = std::max(temp, end);
-    //         }
-    //     }
-    //     interval->start = begin;
-    //     interval->end = end;
-    // }
+
     bool change;
     change = true;
     while (change)
@@ -161,7 +120,6 @@ void LinearScan::computeLiveIntervals()
 
 bool LinearScan::linearScanRegisterAllocation()
 {
-    // Todo
     bool done = true;
     active.clear();
     regs.clear();
@@ -202,12 +160,6 @@ void LinearScan::genSpillCode()
     {
         if(!interval->spill)
             continue;
-        // TODO
-        /* HINT:
-         * The vreg should be spilled to memory.
-         * 1. insert ldr inst before the use of vreg
-         * 2. insert str inst after the def of vreg
-         */ 
         interval->disp = -func->AllocSpace(4);
         auto offset = new MachineOperand(MachineOperand::IMM, interval->disp);
         auto fp = new MachineOperand(MachineOperand::REG, 11);
@@ -255,7 +207,6 @@ void LinearScan::genSpillCode()
 
 void LinearScan::expireOldIntervals(Interval *interval)
 {
-    // Todo
     /**
      * 
     遍历active列表，看该列表中是否存在结束时间早于unhandled interval的interval（即与当前unhandled interval
@@ -274,7 +225,6 @@ void LinearScan::expireOldIntervals(Interval *interval)
 
 void LinearScan::spillAtInterval(Interval *interval)
 {
-    // Todo
     /**
      *
     选择策略就是看谁的活跃区间结束时间更晚，如果 unhandled interval的结束时间更晚，
