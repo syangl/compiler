@@ -79,7 +79,7 @@ void Function::genMachineCode(AsmBuilder* builder)
     std::map<BasicBlock*, MachineBlock*> map; // 中间代码块和目标代码块的映射
     for(auto block : block_list)
     {
-        block->genMachineCode(builder);
+        block->genMachineCode(builder); // 生成目标代码
         map[block] = builder->getBlock();
     }
     // Add pred and succ for every block

@@ -17,7 +17,7 @@ class Unit
 private:
     std::vector<SymbolEntry*> global_list;
     std::vector<SymbolEntry*> sysy_list;
-    std::vector<Function *> func_list;
+    std::vector<Function *> func_list; // 按照生成的汇编代码文件的写法，自然是一个一个函数（包括main函数）地写声明定义，函数内又包含若干基本块
 public:
     Unit() = default;
     ~Unit() ;

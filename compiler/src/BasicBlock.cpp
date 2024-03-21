@@ -43,7 +43,7 @@ void BasicBlock::output() const
 
     if (!pred.empty())
     {
-        fprintf(yyout, "%*c; preds = %%B%d", 32, '\t', pred[0]->getNo());
+        fprintf(yyout, "%*c; preds = %%B%d", 32, '\t', pred[0]->getNo()); // 注释打印流图关系
         for (auto i = pred.begin() + 1; i != pred.end(); i++)
             fprintf(yyout, ", %%B%d", (*i)->getNo());
     }

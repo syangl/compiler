@@ -11,7 +11,7 @@ class BasicBlock
     typedef std::vector<BasicBlock *>::iterator bb_iterator;
 
 private:
-    std::vector<BasicBlock *> pred, succ; // 后继基本块列表succ
+    std::vector<BasicBlock *> pred, succ; // 后继基本块列表succ （基本块之间形成了流图，每个基本块都有前驱基本块列表pred和后继基本块列表succ，以此表示流图，生成的代码文件注释打印了流图关系）
     Instruction *head;
     Function *parent;
     int no;
